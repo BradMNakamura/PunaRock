@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bradm\\Source\\Repos\\PunaRock\\123\\123.csproj",
-      "projectName": "123",
-      "projectPath": "C:\\Users\\bradm\\Source\\Repos\\PunaRock\\123\\123.csproj",
+      "projectUniqueName": "C:\\Users\\bradm\\Source\\Repos\\PunaRock\\123\\Puna Rock.csproj",
+      "projectName": "Puna Rock",
+      "projectPath": "C:\\Users\\bradm\\Source\\Repos\\PunaRock\\123\\Puna Rock.csproj",
       "packagesPath": "C:\\Users\\bradm\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\bradm\\Source\\Repos\\PunaRock\\123\\obj\\",
       "projectStyle": "PackageReference",
