@@ -1,0 +1,8 @@
+C:\Users\bradm\source\repos\Puna Rock\Puna Rock\bin\Debug\net6.0\publish\Puna Rock
+C:\Users\bradm\source\repos\Puna Rock\Puna Rock\bin\Debug\net6.0\publish\appsettings.Development.json
+C:\Users\bradm\source\repos\Puna Rock\Puna Rock\bin\Debug\net6.0\publish\appsettings.json
+C:\Users\bradm\source\repos\Puna Rock\Puna Rock\bin\Debug\net6.0\publish\aws-beanstalk-tools-defaults.json
+C:\Users\bradm\source\repos\Puna Rock\Puna Rock\bin\Debug\net6.0\publish\Puna Rock.dll
+C:\Users\bradm\source\repos\Puna Rock\Puna Rock\bin\Debug\net6.0\publish\Puna Rock.deps.json
+C:\Users\bradm\source\repos\Puna Rock\Puna Rock\bin\Debug\net6.0\publish\Puna Rock.runtimeconfig.json
+C:\Users\bradm\source\repos\Puna Rock\Puna Rock\bin\Debug\net6.0\publish\Puna Rock.pdb
