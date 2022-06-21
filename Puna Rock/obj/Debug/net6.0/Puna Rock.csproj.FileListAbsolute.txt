@@ -24,3 +24,4 @@ C:\Users\bradm\Source\Repos\Puna Rock\Puna Rock\obj\Debug\net6.0\refint\Puna Roc
 C:\Users\bradm\Source\Repos\Puna Rock\Puna Rock\obj\Debug\net6.0\Puna Rock.pdb
 C:\Users\bradm\Source\Repos\Puna Rock\Puna Rock\obj\Debug\net6.0\Puna Rock.genruntimeconfig.cache
 C:\Users\bradm\Source\Repos\Puna Rock\Puna Rock\obj\Debug\net6.0\ref\Puna Rock.dll
+C:\Users\bradm\source\repos\Puna Rock\Puna Rock\bin\Debug\net6.0\aws-beanstalk-tools-defaults.json

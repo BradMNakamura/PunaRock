@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bradm\\Source\\Repos\\Puna Rock\\Puna Rock\\Puna Rock.csproj": {}
+    "C:\\Users\\bradm\\source\\repos\\Puna Rock\\Puna Rock\\Puna Rock.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bradm\\Source\\Repos\\Puna Rock\\Puna Rock\\Puna Rock.csproj": {
+    "C:\\Users\\bradm\\source\\repos\\Puna Rock\\Puna Rock\\Puna Rock.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bradm\\Source\\Repos\\Puna Rock\\Puna Rock\\Puna Rock.csproj",
+        "projectUniqueName": "C:\\Users\\bradm\\source\\repos\\Puna Rock\\Puna Rock\\Puna Rock.csproj",
         "projectName": "Puna Rock",
-        "projectPath": "C:\\Users\\bradm\\Source\\Repos\\Puna Rock\\Puna Rock\\Puna Rock.csproj",
+        "projectPath": "C:\\Users\\bradm\\source\\repos\\Puna Rock\\Puna Rock\\Puna Rock.csproj",
         "packagesPath": "C:\\Users\\bradm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bradm\\Source\\Repos\\Puna Rock\\Puna Rock\\obj\\",
+        "outputPath": "C:\\Users\\bradm\\source\\repos\\Puna Rock\\Puna Rock\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
