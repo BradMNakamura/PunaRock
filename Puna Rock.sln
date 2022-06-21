@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Puna Rock", "Puna Rock\Puna Rock.csproj", "{CA550DCF-EEBC-40BC-914D-26406F7903AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Puna Rock", "Puna Rock\Puna Rock.csproj", "{48CE14BA-CE22-4E56-BFA0-2522E0C5EA56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CA550DCF-EEBC-40BC-914D-26406F7903AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CA550DCF-EEBC-40BC-914D-26406F7903AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CA550DCF-EEBC-40BC-914D-26406F7903AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CA550DCF-EEBC-40BC-914D-26406F7903AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48CE14BA-CE22-4E56-BFA0-2522E0C5EA56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48CE14BA-CE22-4E56-BFA0-2522E0C5EA56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48CE14BA-CE22-4E56-BFA0-2522E0C5EA56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48CE14BA-CE22-4E56-BFA0-2522E0C5EA56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7341D6C8-8E57-49B5-980B-4C2DEDBF8A99}
+		SolutionGuid = {6916EE55-8275-4779-8A2D-27ED3472B423}
 	EndGlobalSection
 EndGlobal
