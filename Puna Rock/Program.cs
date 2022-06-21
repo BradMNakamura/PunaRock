@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WebApplication3.Data;
+using Puna_Rock.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -11,7 +11,6 @@ services.AddAuthentication().AddGoogle(googleOptions =>
     googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
     googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
 });
-
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
