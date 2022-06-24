@@ -17,4 +17,12 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\data\Logo\puna-rock-logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

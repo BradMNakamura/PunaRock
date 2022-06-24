@@ -7,12 +7,17 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Puna_Rock.styles.css" asp-append-version="true" />
+    @*Favicon Icons*@
+    <link rel="apple-touch-icon" sizes="180x180" href="~/data/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/data/favicon_io//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/data/favicon_io//favicon-16x16.png">
+    <link rel="manifest" href="~/data/favicon_io/site.webmanifest">
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Puna_Rock</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index"> <img src="~/data/Logo/puna-rock-logo.png"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,8 +28,29 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Products">Products</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Contact">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/FAQ">FAQ</a>
+                        </li>
+@*                      <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/placeholder">[placeholder]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/placeholder">[placeholder]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/placeholder">[placeholder]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/placeholder">[placeholder]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/placeholder">[placeholder]</a>
+                        </li>*@
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -39,8 +65,14 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - Puna_Rock - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <p style="text-align: center">Puna Rock Company • 16-669 Milo St. • Keaau, HI 96749 • Phone: 
+                <a href="18089667625">(808) 966-ROCK (7625)</a> • Email:&nbsp;
+                <a href="mailto:inquiries@punarock.com">inquiries@punarock.com</a>
+            </p>
+            <p style="text-align: center">Open Mon.-Fri. 7:00 am - 3:00 pm | Sat. 7:00 am - 11:30 am</p>
+            <p style="text-align: center">&copy; 2022 - Puna_Rock - <a asp-area="" asp-page="/Privacy">Privacy</a></p>
         </div>
+
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
