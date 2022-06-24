@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Puna_Rock.Pages
 {
-    public class ContactModel : PageModel
+    public class Tab_7Model : PageModel
     {
         private readonly ILogger<PrivacyModel> _logger;
 
-        public ContactModel(ILogger<PrivacyModel> logger)
+        public Tab_7Model(ILogger<PrivacyModel> logger)
         {
             _logger = logger;
         }
