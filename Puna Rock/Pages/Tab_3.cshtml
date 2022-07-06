@@ -6,189 +6,50 @@
 <div class="text-center">
     <h2>Pre-Shift Inspection</h2>
 </div>
+
+
 <div>
-    <form method="post">
+
+    <form id = "safetyCheck" method="post" runat="server">
         <label for="date">Date:</label>
         <input type="date" id="date" name="date" required>
         <br/>
         <br/>
         <label for="EquipNo">Equipment Number:</label>
           <select name="EquipNo">
-              <option value="cat375">Cat375</option>
-              <option value="cat325d">Cat325D</option>
-              <option value="cat330c">Cat330C</option>
-              <option value="pc750.1">PC750.1</option>
-              <option value="pc750.2">PC750.2</option>
-              <option value="pc650.2">PC650.2</option>
+            @foreach(var Item in Model.Equipment)
+            {
+                <option value = "@Item.Id">@Item.Name</option>
+            }
           </select>
           <br/>
           <br/>
+        @{int q = 1;}
         @foreach(var Item in Model.SafetyCheck)
         {
-            <p><b>@Item.Question</b>
-            <input type = "radio" id="good" name = "@Item.Id" value="Good" required>
+            string element = "question " + q;
+            q++;
+            <p><b>@Item.Question</b><br/>
+            <input type = "radio" id="good" name = "@Item.Id" value="Good" onclick="change('@element')" required>
             <label for="good">Good</label>
-            <input type = "radio" id="caution" name = "@Item.Id" value="Caution">
+            <input type = "radio" id="caution" name = "@Item.Id" value="Caution" onclick="change('@element')">
             <label for="caution">Caution</label>
-            <input type = "radio" id="tag-out" name = "@Item.Id" value="Tag-Out">
-            <label for="tag-out">Tag-Out</label>
+            <input type = "radio" id="tag-out" name = "@Item.Id" value="Tag-Out" onclick="tag_clicked('@element')">
+            <label for="tag-out">Tag-Out</label><br/>
+            <input type ="text" id="@element" name="@Item.Id" placeholder="Enter Comment" style="display: none;" >
             </p>
         }
+        <script>
+            function tag_clicked(id) {
+                document.getElementById(id).style.display = "inline";
+            }
+        </script>
+        <script>
+            function change(id){
+                document.getElementById(id).style.display = "none";
+            }
+        </script>
 
-        @*
-          <label for="date">Date:</label>
-          <input type="date" id="date" name="date" required>
-      <br/>
-      <br/>
-          <label for="EquipNo">Equipment Number:</label>
-          <select name="EquipNo">
-              <option value="cat375">Cat375</option>
-              <option value="cat325d">Cat325D</option>
-              <option value="cat330c">Cat330C</option>
-              <option value="pc750.1">PC750.1</option>
-              <option value="pc750.2">PC750.2</option>
-              <option value="pc650.2">PC650.2</option>
-
-          </select>
-      <br/>
-      <br/>
-          <label for="hourmeter">Hour Meter Reading:</label>
-          <input type="number" id="hourmeter" name="hourmeter" min="0" required/>
-      <br/>
-      <br/>
-          <h2>Checklist</h2>
-              <label for="Audibles1"><b>Travel Alarm / Horn</b>:</label><br/>
-              <label class="Audibles1">
-                <input type="radio" id="good" name="TravelAlarm" checked> Good
-              </label>
-              <label class="Audibles1">
-                <input type="radio" id="caution" name="TravelAlarm"> Caution
-              </label>
-              <label class="Audibles1">
-                <input type="radio" id="tag-out" name="TravelAlarm"> Tag-Out
-              </label><br/>
-
-              <label for="Lights"><b>Flood Lights</b>:</label><br/>
-              <label class="Lights">
-                <input type="radio" id="good" name="FloodLights" checked> Good
-              </label>
-              <label class="Lights">
-                <input type="radio" id="caution" name="FloodLights"> Caution
-              </label>
-              <label class="Lights">
-                <input type="radio" id="tag-out" name="FloodLights"> Tag-Out
-              </label><br/>
-
-              <label for="InsideCab"><b>Inside Cab Seat Belt / Gauges / Interior Condition </b>:</label><br/>
-              <label class="InsideCab">
-                <input type="radio" id="good" name="Insidecab" checked> Good
-              </label>
-              <label class="InsideCab">
-                <input type="radio" id="caution" name="Insidecab"> Caution
-              </label>
-              <label class="InsideCab">
-                <input type="radio" id="tag-out" name="Insidecab"> Tag-Out
-              </label><br/>
-
-              <label for="Windows"><b>Window and Mirror Cracks / Visibility / Wipers</b>:</label><br/>
-              <label class="Windows">
-                <input type="radio" id="good" name="WindowsAndMirrors" checked> Good
-              </label>
-              <label class="Windows">
-                <input type="radio" id="caution" name="WindowsAndMirrors"> Caution
-              </label>
-              <label class="Windows">
-                <input type="radio" id="tag-out" name="WindowsAndMirrors"> Tag-Out
-              </label><br/>
-
-              <label for="Fire"><b>Fire Extinguisher Expiration Date / Charge / Pin Strap / Mount</b>:</label><br/>
-              <label class="Fire">
-                <input type="radio" id="good" name="FireExtinguisher" checked> Good
-              </label>
-              <label class="Fire">
-                <input type="radio" id="caution" name="FireExtinguisher"> Caution
-              </label>
-              <label class="Fire">
-                <input type="radio" id="tag-out" name="FireExtinguisher"> Tag-Out
-              </label><br/>
-
-              <label for="Safe"><b>Ladders / Railings / Walkways</b>:</label><br/>
-              <label class="Safe">
-                <input type="radio" id="good" name="SafeAccess" checked> Good
-              </label>
-              <label class="Safe">
-                <input type="radio" id="caution" name="SafeAccess"> Caution
-              </label>
-              <label class="Safe">
-                <input type="radio" id="tag-out" name="SafeAccess"> Tag-Out
-              </label><br/>
-
-              <label for="Breaks"><b>Safety Lockout Lever</b>:</label><br/>
-              <label class="Breaks">
-                <input type="radio" id="good" name="Break" checked> Good
-              </label>
-              <label class="Breaks">
-                <input type="radio" id="caution" name="Break"> Caution
-              </label>
-              <label class="Breaks">
-                <input type="radio" id="tag-out" name="Break"> Tag-Out
-              </label><br/>
-
-              <label for="Engine"><b>Engine and PTO Oil Level / Leaks</b>:</label><br/>
-              <label class="Engine">
-                <input type="radio" id="good" name="EngineOil" checked> Good
-              </label>
-              <label class="Engine">
-                <input type="radio" id="caution" name="EngineOil"> Caution
-              </label>
-              <label class="Engine">
-                <input type="radio" id="tag-out" name="EngineOil"> Tag-Out
-              </label><br/>
-
-              <label for="Transmission"><b>Radiator Level / Leaks</b>:</label><br/>
-              <label class="Transmission">
-                <input type="radio" id="good" name="Trans" checked> Good
-              </label>
-              <label class="Transmission">
-                <input type="radio" id="caution" name="Trans"> Caution
-              </label>
-              <label class="Transmission">
-                <input type="radio" id="tag-out" name="Trans"> Tag-Out
-              </label><br/>
-
-              <label for="Hydraulics"><b>Hydraulics Pump / Swing Motor / Ram / Hose / O-Ring</b>:</label><br/>
-              <label class="Hydraulics">
-                <input type="radio" id="good" name="Hydr" checked> Good
-              </label>
-              <label class="Hydraulics">
-                <input type="radio" id="caution" name="Hydr"> Caution
-              </label>
-              <label class="Hydraulics">
-                <input type="radio" id="tag-out" name="Hydr"> Tag-Out
-              </label><br/>
-
-              <label for="PinsAndBushings"><b>Pins and Bushings Play / Greased</b>:</label><br/>
-              <label class="PinsAndBushings">
-                <input type="radio" id="good" name="Pins" checked> Good
-              </label>
-              <label class="PinsAndBushings">
-                <input type="radio" id="caution" name="Pins"> Caution
-              </label>
-              <label class="PinsAndBushings">
-                <input type="radio" id="tag-out" name="Pins"> Tag-Out
-              </label><br/>
-
-              <label for="Undercarriage"><b>Undercarriage Track Links / Pad / Bolts / Sprocket / Idler / Roller Guards</b>:</label><br/>
-              <label class="Undercarriage">
-                <input type="radio" id="good" name="Under" checked> Good
-              </label>
-              <label class="Undercarriage">
-                <input type="radio" id="caution" name="Under"> Caution
-              </label>
-              <label class="Undercarriage">
-                <input type="radio" id="tag-out" name="Under"> Tag-Out
-              </label><br/><br/>
-              *@
-      <input type="submit" name="submit" value="Submit" />
+      <input type="submit" name="submit" value="Submit"/>
     </form>
 </div>
