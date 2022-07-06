@@ -8,6 +8,34 @@
 </div>
 <div>
     <form method="post">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+        <br/>
+        <br/>
+        <label for="EquipNo">Equipment Number:</label>
+          <select name="EquipNo">
+              <option value="cat375">Cat375</option>
+              <option value="cat325d">Cat325D</option>
+              <option value="cat330c">Cat330C</option>
+              <option value="pc750.1">PC750.1</option>
+              <option value="pc750.2">PC750.2</option>
+              <option value="pc650.2">PC650.2</option>
+          </select>
+          <br/>
+          <br/>
+        @foreach(var Item in Model.SafetyCheck)
+        {
+            <p><b>@Item.Question</b>
+            <input type = "radio" id="good" name = "@Item.Id" value="Good" required>
+            <label for="good">Good</label>
+            <input type = "radio" id="caution" name = "@Item.Id" value="Caution">
+            <label for="caution">Caution</label>
+            <input type = "radio" id="tag-out" name = "@Item.Id" value="Tag-Out">
+            <label for="tag-out">Tag-Out</label>
+            </p>
+        }
+
+        @*
           <label for="date">Date:</label>
           <input type="date" id="date" name="date" required>
       <br/>
@@ -160,7 +188,7 @@
               <label class="Undercarriage">
                 <input type="radio" id="tag-out" name="Under"> Tag-Out
               </label><br/><br/>
-
+              *@
       <input type="submit" name="submit" value="Submit" />
     </form>
 </div>

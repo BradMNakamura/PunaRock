@@ -5,9 +5,9 @@ namespace Puna_Rock.Pages
 {
     public class Tab_2Model : PageModel
     {
-        private readonly ILogger<PrivacyModel> _logger;
+        private readonly ILogger<Tab_2Model> _logger;
 
-        public Tab_2Model(ILogger<PrivacyModel> logger)
+        public Tab_2Model(ILogger<Tab_2Model> logger)
         {
             _logger = logger;
         }
