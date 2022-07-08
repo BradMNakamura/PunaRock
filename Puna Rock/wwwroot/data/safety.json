@@ -1,0 +1,50 @@
+[
+	{
+		"id" : "Audibles",
+		"question" : "Travel Alarm / Horn"
+	},
+	{
+		"id" : "Lights",
+		"question" : "Flood Lights"
+	},
+	{
+		"id" : "InsideCab",
+		"question" : "Inside Cab Seat Belt / Gauges / Interior Condition"
+	},
+	{
+		"id" : "Windows",
+		"question" : "Window and Mirror Cracks / Visibility / Wipers"
+	},
+	{
+		"id" : "Fire",
+		"question" : "Fire Extinguisher Expiration Date / Charge / Pin Strap / Mount"
+	},
+	{
+		"id" : "Safe",
+		"question" : "Ladders / Railings / Walkways"
+	},
+	{
+		"id" : "Breaks",
+		"question" : "Safety Lockout Lever"
+	},
+	{
+		"id" : "Engine",
+		"question" : "Engine and PTO Oil Level / Leaks"
+	},
+	{
+		"id" : "Transmission",
+		"question" : "Radiator Level / Leaks"
+	},
+	{
+		"id" : "Hydraulics",
+		"question" : "Hydraulics Pump / Swing Motor / Ram / Hose / O-Ring"
+	},
+	{
+		"id" : "PinsAndBushings",
+		"question" : "Pins and Bushings Play / Greased"
+	},
+	{
+		"id" : "Undercarriage",
+		"question" : "Undercarriage Track Links / Pad / Bolts / Sprocket / Idler / Roller Guards"
+	}
+]
