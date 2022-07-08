@@ -17,7 +17,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index"> <img src="~/data/Logo/puna-rock-logo.png"></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> <img src="~/data/Logo/puna-rock-logo.png"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -25,32 +25,34 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Tab_1">Tab_1</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SafetyCheck">Safety Check</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Tab_2">Tab_2</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Placeholder">__</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Tab_3">Excavator Pre-Shift Inspection</a>
-                        </li>
-                      <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Tab_4">Tab_4</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Placeholder">__</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Tab_5">Tab_5</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Placeholder">__</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Tab_6">Tab_6</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Placeholder">__</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Tab_7">Tab_7</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Placeholder">__</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Tab_8">Tab_8</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Placeholder">__</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Placeholder">__</a>
+                        </li>
+
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -68,7 +70,7 @@
             <p style="text-align: center">Puna Rock Company • 16-669 Milo St. • Keaau, HI 96749
             </p>
             
-            <p style="text-align: center">&copy; 2022 - Puna_Rock - <a asp-area="" asp-page="/Privacy">Privacy</a></p>
+            <p style="text-align: center">&copy; 2022 - Puna_Rock - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
         </div>
 
     </footer>
