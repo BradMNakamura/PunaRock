@@ -49,7 +49,15 @@ namespace Puna_Rock.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+        public IActionResult TimeSheet(IFormCollection form)
+        {
+            foreach(var item in form)
+            {
+                Console.WriteLine(item);
+            }
+            return RedirectToAction("Index");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
