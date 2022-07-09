@@ -40,6 +40,19 @@ namespace Puna_Rock.Controllers
             model.Equipment = Equipment;
             return View(model);
         }
+        [HttpPost]
+        public IActionResult SafetyCheck(IFormCollection form)
+        {
+            Console.WriteLine("POSTED");
+            string date = form["date"].ToString();
+            foreach (var item in form)
+            {
+                Console.WriteLine(item);
+            }
+            return RedirectToAction("Index");
+        }
+
+
         public IActionResult Placeholder()
         {
             return View();
