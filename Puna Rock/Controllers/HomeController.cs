@@ -16,12 +16,15 @@ namespace Puna_Rock.Controllers
         public JsonFileSafetyCheckService SafetyCheckService;
 
         public JsonFileEquipmentService EquipmentService;
+
+        public JsonFileScaleTicketsService ScaleTicketsService;
         public HomeController(ILogger<HomeController> logger, JsonFileSafetyCheckService safetyCheckService,
-                JsonFileEquipmentService equipmentService)
+                JsonFileEquipmentService equipmentService, JsonFileScaleTicketsService scaleTicketsService)
         {
             _logger = logger;
             SafetyCheckService = safetyCheckService;
             EquipmentService = equipmentService;
+            ScaleTicketsService = scaleTicketsService;
         }
         public IActionResult Index()
         {
@@ -42,7 +45,9 @@ namespace Puna_Rock.Controllers
         }
         public IActionResult ScaleTickets()
         {
+            var ScaleTickets = ScaleTicketsService.GetList();
             dynamic model = new ExpandoObject();
+            model.ScaleTickets = ScaleTickets;
             return View(model);
         }
         public IActionResult Placeholder()

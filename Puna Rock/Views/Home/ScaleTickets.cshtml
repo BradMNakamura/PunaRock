@@ -1,5 +1,76 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
 }
+<div class="text-center">
+    <h2>Scale Tickets</h2>
+</div>
+
+<div>
+    <form id="scaleTickets" method="post" runat="server">
+        <div style= padding: 15px; min-width:100px; display: inline-block">
+            <label for="ticketNumber">Ticket Number:</label>
+            <input type="number" id="ticketNumber" min="0" name="ticketNumber" required>
+            <br />
+            <br />
+            <label for="ticketDate">Ticket Date:</label>
+            <input type="date" id="ticketDate" name="ticketDate" required>
+            <br />
+            <br />
+
+            <label for="customerList">Customer List:</label>
+            <select name="customerList">
+            @foreach(var Item in Model.ScaleTickets)
+            {
+                if(Item.Type == "Customer")
+                {
+                    <option value = "@Item.Id">@Item.Id</option>
+                }               
+            }
+            </select>
+            <br />
+            <br />
+            <label for="productList">Product List:</label>
+            <select name="productList">
+            @foreach(var Item in Model.ScaleTickets)
+            {
+                if(Item.Type == "Product")
+                {
+                    <option value = "@Item.Id">@Item.Id</option>
+                }               
+            }
+            </select>
+            <br />
+            <br />
+            <label for="jobName">Job Name:</label>
+            <input type="text" id="jobName" name="jobName" required>
+            <br />
+            <br />
+            <label for="grossWeight">Gross Weight:</label>
+            <input type="number" id="grossWeight" min="0" name="grossWeight" placeholder="0" required>
+            <br />
+            <br />
+            <label for="tareWeight">Tare Weight:</label>
+            <input type="number" id="tareWeight" min="0" name="tareWeight" placeholder="0" required>
+            <br />
+            <br />
+            <label for="netWeight">Net Weight:</label>
+            <p id="calculatedNetWeight">0</p>
+            <input type="button" id="netWeight" value="Calculate net weight" onclick="calculateNetWeight()">
+            <script>
+                function calculateNetWeight() {
+                    var gWeight = parseFloat(document.getElementById("grossWeight").value);
+                    var tWeight = parseFloat(document.getElementById("tareWeight").value);
+                    var nWeight = gWeight - tWeight;
+                    if (nWeight > 0) document.getElementById("calculatedNetWeight").innerHTML = nWeight;                   
+                }
+            </script>
+            <br />
+            <br />
+            <label for="digitalSignature">Digital Signature:</label>
+            <input type="text" id="digitalSignature" name="digitalSignature" required>
+            <br />
+            <br />
+            <input type="submit" name="submit" value="Submit"/>
+        </div>      
+    </form>
+
+</div>
