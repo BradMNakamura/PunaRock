@@ -40,6 +40,11 @@ namespace Puna_Rock.Controllers
             model.Equipment = Equipment;
             return View(model);
         }
+        public IActionResult ScaleTickets()
+        {
+            dynamic model = new ExpandoObject();
+            return View(model);
+        }
         public IActionResult Placeholder()
         {
             return View();
