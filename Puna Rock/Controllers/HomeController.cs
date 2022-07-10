@@ -13,7 +13,7 @@ namespace Puna_Rock.Controllers
 {
     public class HomeController : Controller
     {
-        private string spreadsheetId = "19ZzHAu0oKC68hdrAc2uDYlj4MH4HRZSdIaPnblsXg70";
+        private string spreadsheetId = "1s7asiUgljjTxqMfFQGHAKKOl3oBDGpL6SggzBnen-gM";
         private string worksheetName = "Sheet1";
 
         private readonly ILogger<HomeController> _logger;
@@ -84,10 +84,24 @@ namespace Puna_Rock.Controllers
         [HttpPost]
         public IActionResult TimeSheet(IFormCollection form)
         {
-            foreach(var item in form)
-            {
+            int i = 0;
+            GoogleSheets sheet = new GoogleSheets();
+            IList<IList<object>> sheetsValues = new List<IList<object>>();
+            foreach (var item in form)
+            {   
+                // Just to see the pushed info
                 Console.WriteLine(item);
+                if (item.Key.ToString() != "submit" && item.Key.ToString() != "__RequestVerificationToken")
+                {
+                    foreach (var temp in item.Value)
+                    {
+                        sheetsValues.Add(new List<object>());
+                        sheetsValues[0].Add(item.Value[i++].ToString());
+                       
+                    }
+                }
             }
+            sheet.Append(spreadsheetId, worksheetName, sheetsValues);
             return RedirectToAction("Index");
         }
 
