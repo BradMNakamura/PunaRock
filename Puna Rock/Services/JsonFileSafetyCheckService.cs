@@ -19,7 +19,7 @@ namespace Puna_Rock.Services
 
         private string JsonFileName => Path.Combine(WebHostEnvironment.WebRootPath, "data", "safety.json");
 
-        public IEnumerable<SafetyCheck> GetQuestions()
+        public IEnumerable<SafetyCheck> GetData()
         {
             using var jsonFileReader = File.OpenText(JsonFileName);
             return JsonSerializer.Deserialize<SafetyCheck[]>(jsonFileReader.ReadToEnd(),

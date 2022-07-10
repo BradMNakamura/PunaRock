@@ -1,50 +1,92 @@
 [
 	{
-		"id" : "Audibles",
-		"question" : "Travel Alarm / Horn"
+		"id": "Audibles",
+		"data": "Travel Alarm / Horn",
+		"type": "Safety"
 	},
 	{
-		"id" : "Lights",
-		"question" : "Flood Lights"
+		"id": "Lights",
+		"data": "Flood Lights",
+		"type": "Safety"
 	},
 	{
-		"id" : "InsideCab",
-		"question" : "Inside Cab Seat Belt / Gauges / Interior Condition"
+		"id": "InsideCab",
+		"data": "Inside Cab Seat Belt / Gauges / Interior Condition",
+		"type": "Safety"
 	},
 	{
-		"id" : "Windows",
-		"question" : "Window and Mirror Cracks / Visibility / Wipers"
+		"id": "Windows",
+		"data": "Window and Mirror Cracks / Visibility / Wipers",
+		"type": "Safety"
 	},
 	{
-		"id" : "Fire",
-		"question" : "Fire Extinguisher Expiration Date / Charge / Pin Strap / Mount"
+		"id": "Fire",
+		"data": "Fire Extinguisher Expiration Date / Charge / Pin Strap / Mount",
+		"type": "Safety"
 	},
 	{
-		"id" : "Safe",
-		"question" : "Ladders / Railings / Walkways"
+		"id": "Safe",
+		"data": "Ladders / Railings / Walkways",
+		"type": "Safety"
 	},
 	{
-		"id" : "Breaks",
-		"question" : "Safety Lockout Lever"
+		"id": "Breaks",
+		"data": "Safety Lockout Lever",
+		"type": "Safety"
 	},
 	{
-		"id" : "Engine",
-		"question" : "Engine and PTO Oil Level / Leaks"
+		"id": "Engine",
+		"data": "Engine and PTO Oil Level / Leaks",
+		"type": "Safety"
 	},
 	{
-		"id" : "Transmission",
-		"question" : "Radiator Level / Leaks"
+		"id": "Transmission",
+		"data": "Radiator Level / Leaks",
+		"type": "Safety"
 	},
 	{
-		"id" : "Hydraulics",
-		"question" : "Hydraulics Pump / Swing Motor / Ram / Hose / O-Ring"
+		"id": "Hydraulics",
+		"data": "Hydraulics Pump / Swing Motor / Ram / Hose / O-Ring",
+		"type": "Safety"
 	},
 	{
-		"id" : "PinsAndBushings",
-		"question" : "Pins and Bushings Play / Greased"
+		"id": "PinsAndBushings",
+		"data": "Pins and Bushings Play / Greased",
+		"type": "Safety"
 	},
 	{
-		"id" : "Undercarriage",
-		"question" : "Undercarriage Track Links / Pad / Bolts / Sprocket / Idler / Roller Guards"
+		"id": "Undercarriage",
+		"data": "Undercarriage Track Links / Pad / Bolts / Sprocket / Idler / Roller Guards",
+		"type": "Safety"
+	},
+	{
+		"id": "cat375",
+		"data": "Cat375",
+		"type": "Equipment"
+	},
+	{
+		"id": "cat325d",
+		"data": "Cat325D",
+		"type": "Equipment"
+	},
+	{
+		"id": "cat330c",
+		"data": "Cat330C",
+		"type": "Equipment"
+	},
+	{
+		"id": "pc750.1",
+		"data": "PC750.1",
+		"type": "Equipment"
+	},
+	{
+		"id": "pc750.2",
+		"data": "PC750.2",
+		"type": "Equipment"
+	},
+	{
+		"id": "pc650.2",
+		"data": "PC650.2",
+		"type": "Equipment"
 	}
 ]

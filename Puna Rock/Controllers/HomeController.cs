@@ -20,13 +20,10 @@ namespace Puna_Rock.Controllers
 
         public JsonFileSafetyCheckService SafetyCheckService;
 
-        public JsonFileEquipmentService EquipmentService;
-        public HomeController(ILogger<HomeController> logger, JsonFileSafetyCheckService safetyCheckService,
-                JsonFileEquipmentService equipmentService)
+        public HomeController(ILogger<HomeController> logger, JsonFileSafetyCheckService safetyCheckService)
         {
             _logger = logger;
             SafetyCheckService = safetyCheckService;
-            EquipmentService = equipmentService;
         }
         public IActionResult Index()
         {
@@ -38,11 +35,9 @@ namespace Puna_Rock.Controllers
         }
         public IActionResult SafetyCheck()
         {
-            var SafetyCheck = SafetyCheckService.GetQuestions();
-            var Equipment = EquipmentService.GetEquip();
+            var SafetyCheck = SafetyCheckService.GetData();
             dynamic model = new ExpandoObject();
             model.SafetyCheck = SafetyCheck;
-            model.Equipment = Equipment;
             return View(model);
         }
         [HttpPost]

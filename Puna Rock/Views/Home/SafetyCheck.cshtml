@@ -14,9 +14,12 @@
         <br/>
         <label for="EquipNo">Equipment Number:</label>
           <select name="EquipNo">
-            @foreach(var Item in Model.Equipment)
+            @foreach(var Item in Model.SafetyCheck)
             {
-                <option value = "@Item.Id">@Item.Name</option>
+                if(Item.Type == "Equipment")
+                {
+                    <option value = "@Item.Id">@Item.Data</option>
+                }
             }
           </select>
           <br/>
@@ -24,17 +27,20 @@
         @{int q = 1;}
         @foreach(var Item in Model.SafetyCheck)
         {
-            string element = "question " + q;
-            q++;
-            <p><b>@Item.Question</b><br/>
-            <input type = "radio" id="good" name = "@Item.Id" value="Good" onclick="change('@element')" required>
-            <label for="good">Good</label>
-            <input type = "radio" id="caution" name = "@Item.Id" value="Caution" onclick="change('@element')">
-            <label for="caution">Caution</label>
-            <input type = "radio" id="tag-out" name = "@Item.Id" value="Tag-Out" onclick="tag_clicked('@element')">
-            <label for="tag-out">Tag-Out</label><br/>
-            <input type ="text" id="@element" name="@Item.Id" placeholder="Enter Comment" style="display: none;">
-            </p>
+            if(Item.Type == "Safety")
+            {
+                string element = "question " + q;
+                q++;
+                <p><b>@Item.Data</b><br/>
+                <input type = "radio" id="good" name = "@Item.Id" value="Good" onclick="change('@element')" required>
+                <label for="good">Good</label>
+                <input type = "radio" id="caution" name = "@Item.Id" value="Caution" onclick="change('@element')">
+                <label for="caution">Caution</label>
+                <input type = "radio" id="tag-out" name = "@Item.Id" value="Tag-Out" onclick="tag_clicked('@element')">
+                <label for="tag-out">Tag-Out</label><br/>
+                <input type ="text" id="@element" name="@Item.Id" placeholder="Enter Comment" style="display: none;">
+                </p>
+            }
         }
         <script>
             function tag_clicked(id) {
