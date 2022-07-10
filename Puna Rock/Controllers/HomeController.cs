@@ -6,11 +6,16 @@ using Puna_Rock.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
 using System.Dynamic;
+using SheetsQuickstart;
+using System.Collections.Generic;
 
 namespace Puna_Rock.Controllers
 {
     public class HomeController : Controller
     {
+        private string spreadsheetId = "19ZzHAu0oKC68hdrAc2uDYlj4MH4HRZSdIaPnblsXg70";
+        private string worksheetName = "Sheet1";
+
         private readonly ILogger<HomeController> _logger;
 
         public JsonFileSafetyCheckService SafetyCheckService;
@@ -40,6 +45,33 @@ namespace Puna_Rock.Controllers
             model.Equipment = Equipment;
             return View(model);
         }
+        [HttpPost]
+        public IActionResult SafetyCheck(IFormCollection form)
+        {
+            GoogleSheets sheet = new GoogleSheets();
+            IList<IList<object>> sheetsValues = new List<IList<object>>();
+            foreach (var item in form)
+            {
+                if(item.Key.ToString()!="submit" && item.Key.ToString() != "__RequestVerificationToken")
+                {
+                    sheetsValues.Add(new List<object>());
+                    sheetsValues[0].Add(item.Value[0].ToString());
+                    sheetsValues.Add(new List<object>());
+                    if (item.Value.Count > 1)
+                    {
+                        sheetsValues[0].Add(item.Value[1].ToString());
+                    }
+                    else if(item.Key.ToString()!="date" && item.Key.ToString()!="EquipNo")
+                    {
+                        sheetsValues[0].Add("");
+                    }
+                }
+            }
+            sheet.Append(spreadsheetId, worksheetName, sheetsValues);
+            return RedirectToAction("Index");
+        }
+
+
         public IActionResult Placeholder()
         {
             return View();
