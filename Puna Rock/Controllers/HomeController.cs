@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Dynamic;
 using SheetsQuickstart;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace Puna_Rock.Controllers
 {
@@ -62,9 +61,9 @@ namespace Puna_Rock.Controllers
         {
             GoogleSheets sheet = new GoogleSheets();
             IList<IList<object>> sheetsValues = new List<IList<object>>();
-            var gWeight = 0.0;
-            var tWeight = 0.0;
-            var nWeight = 0.0;
+            decimal gWeight = 0;
+            decimal tWeight = 0;
+            decimal nWeight = 0;
             foreach (var item in form)
             {               
                 if (item.Key.ToString()!="submit" && item.Key.ToString()!= "__RequestVerificationToken")
@@ -78,11 +77,12 @@ namespace Puna_Rock.Controllers
                     }
                     else if(item.Key.ToString()=="grossWeight")
                     {
-                        gWeight = float.Parse(item.Value[0].ToString());
+                        gWeight = System.Convert.ToDecimal(item.Value[0].ToString());
                     }
                     else if (item.Key.ToString() == "tareWeight")
                     {
-                        tWeight = float.Parse(item.Value[0].ToString());
+                        tWeight = System.Convert.ToDecimal(item.Value[0].ToString());
+
                         nWeight = gWeight - tWeight;
                         sheetsValues[0].Add(nWeight.ToString());
                     }
