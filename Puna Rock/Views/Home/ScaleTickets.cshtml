@@ -45,17 +45,17 @@
             <br />
             <br />
             <label for="grossWeight">Gross Weight:</label>
-            <input type="number" id="grossWeight" min="0" name="grossWeight" placeholder="0" required>
+            <input type="number" id="grossWeight" min="0" name="grossWeight" placeholder="0" OnTextChanged="calculateNetWeight()" required>
             <br />
             <br />
             <label for="tareWeight">Tare Weight:</label>
-            <input type="number" id="tareWeight" min="0" name="tareWeight" placeholder="0" required>
+            <input type="number" id="tareWeight" min="0" name="tareWeight" placeholder="0" OnTextChanged="calculateNetWeight()" required>
             <br />
             <br />
-            <label for="netWeight">Net Weight:</label>
-            <p id="calculatedNetWeight">0</p>
+            <label for="netWeight">Net Weight:</label>       
+            <div id="calculatedNetWeight">0</div>       
             <input type="button" id="netWeight" value="Calculate net weight" onclick="calculateNetWeight()">
-            <script>
+            <script runat="server">              
                 function calculateNetWeight() {
                     var gWeight = parseFloat(document.getElementById("grossWeight").value);
                     var tWeight = parseFloat(document.getElementById("tareWeight").value);
