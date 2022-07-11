@@ -45,11 +45,11 @@
             <br />
             <br />
             <label for="grossWeight">Gross Weight:</label>
-            <input type="number" id="grossWeight" min="0" name="grossWeight" placeholder="0" onkeyup="calculateNetWeight()" required>
+            <input type="number" id="grossWeight" step="0.01" min="0" name="grossWeight" placeholder="0" onkeyup="calculateNetWeight()" required>
             <br />
             <br />
             <label for="tareWeight">Tare Weight:</label>
-            <input type="number" id="tareWeight" min="0" name="tareWeight" placeholder="0" onkeyup="calculateNetWeight()" required>
+            <input type="number" id="tareWeight" step="0.01" min="0" name="tareWeight" placeholder="0" onkeyup="calculateNetWeight()" required>
             <br />
             <br />
             <label for="netWeight">Net Weight:</label>       
@@ -69,7 +69,7 @@
                 function calculateNetWeight() {
                     var txtFirstNo = document.getElementById('grossWeight').value;
                     var txtSecondNo = document.getElementById('tareWeight').value;
-                    var result = parseInt(txtFirstNo) - parseInt(txtSecondNo);
+                    var result = parseFloat(txtFirstNo) - parseFloat(txtSecondNo);
                     if (!isNaN(result) && result > 0) {
                         document.getElementById('calculatedNetWeight').innerHTML = result;
                         document.getElementById('submit').disabled = false;
