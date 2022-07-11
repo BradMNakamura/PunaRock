@@ -84,7 +84,6 @@ namespace Puna_Rock.Controllers
         [HttpPost]
         public IActionResult TimeSheet(IFormCollection form)
         {
-            int i = 0;
             GoogleSheets sheet = new GoogleSheets();
             IList<IList<object>> sheetsValues = new List<IList<object>>();
             foreach (var item in form)
@@ -95,9 +94,12 @@ namespace Puna_Rock.Controllers
                 {
                     foreach (var temp in item.Value)
                     {
-                        sheetsValues.Add(new List<object>());
-                        sheetsValues[0].Add(item.Value[i++].ToString());
-                       
+                        int i = 0;
+                        if (temp != "")
+                        {
+                            sheetsValues.Add(new List<object>());
+                            sheetsValues[0].Add(item.Value[i++].ToString());
+                        }
                     }
                 }
             }
