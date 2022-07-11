@@ -45,15 +45,16 @@
             <br />
             <br />
             <label for="grossWeight">Gross Weight:</label>
-            <input type="number" id="grossWeight" min="0" name="grossWeight" placeholder="0" OnTextChanged="calculateNetWeight()" required>
+            <input type="number" id="grossWeight" min="0" name="grossWeight" placeholder="0" onkeyup="calculateNetWeight()" required>
             <br />
             <br />
             <label for="tareWeight">Tare Weight:</label>
-            <input type="number" id="tareWeight" min="0" name="tareWeight" placeholder="0" OnTextChanged="calculateNetWeight()" required>
+            <input type="number" id="tareWeight" min="0" name="tareWeight" placeholder="0" onkeyup="calculateNetWeight()" required>
             <br />
             <br />
             <label for="netWeight">Net Weight:</label>       
             <div id="calculatedNetWeight">0</div>       
+            @*
             <input type="button" id="netWeight" value="Calculate net weight" onclick="calculateNetWeight()">
             <script runat="server">              
                 function calculateNetWeight() {
@@ -63,13 +64,37 @@
                     if (nWeight > 0) document.getElementById("calculatedNetWeight").innerHTML = nWeight;                   
                 }
             </script>
+            *@
+            <script type="text/javascript">
+                function calculateNetWeight() {
+                    var txtFirstNo = document.getElementById('grossWeight').value;
+                    var txtSecondNo = document.getElementById('tareWeight').value;
+                    var result = parseInt(txtFirstNo) - parseInt(txtSecondNo);
+                    if (!isNaN(result) && result > 0) {
+                        document.getElementById('calculatedNetWeight').innerHTML = result;
+                        document.getElementById('submit').disabled = false;
+                    }
+                    else if(result < 0){
+                        document.getElementById('calculatedNetWeight').innerHTML = result;
+                        document.getElementById('submit').disabled = true;
+                    }
+                    else if(result == 0){
+                        document.getElementById('calculatedNetWeight').innerHTML = '0';
+                        document.getElementById('submit').disabled = false;
+                    }
+                    else{
+                        document.getElementById('calculatedNetWeight').innerHTML = '0';
+                        document.getElementById('submit').disabled = true;
+                    }
+                }
+            </script>
             <br />
             <br />
             <label for="digitalSignature">Digital Signature:</label>
             <input type="text" id="digitalSignature" name="digitalSignature" required>
             <br />
             <br />
-            <input type="submit" name="submit" value="Submit"/>
+            <input type="submit" id = "submit" name="submit" value="Submit"/>
         </div>      
     </form>
 
