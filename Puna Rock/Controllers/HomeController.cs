@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Dynamic;
 using SheetsQuickstart;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Puna_Rock.Controllers
 {
@@ -61,21 +62,29 @@ namespace Puna_Rock.Controllers
         {
             GoogleSheets sheet = new GoogleSheets();
             IList<IList<object>> sheetsValues = new List<IList<object>>();
-            foreach(var item in form)
-            {
-                if(item.Key.ToString()!="submit" && item.Key.ToString()!= "__RequestVerificationToken")
+            var gWeight = 0.0;
+            var tWeight = 0.0;
+            var nWeight = 0.0;
+            foreach (var item in form)
+            {               
+                if (item.Key.ToString()!="submit" && item.Key.ToString()!= "__RequestVerificationToken")
                 {
                     sheetsValues.Add(new List<object>());
                     sheetsValues[0].Add(item.Value[0].ToString());
-                    sheetsValues.Add(new List<object>());
+                    sheetsValues.Add(new List<object>());                  
                     if(item.Value.Count > 1)
                     {
                         sheetsValues[0].Add(item.Value[1].ToString());
                     }
-                    // Note: Net Weight calculated by Google Sheets so add an empty column
-                    if(item.Key.ToString()=="tareWeight")
+                    else if(item.Key.ToString()=="grossWeight")
                     {
-                        sheetsValues[0].Add("");
+                        gWeight = float.Parse(item.Value[0].ToString());
+                    }
+                    else if (item.Key.ToString() == "tareWeight")
+                    {
+                        tWeight = float.Parse(item.Value[0].ToString());
+                        nWeight = gWeight - tWeight;
+                        sheetsValues[0].Add(nWeight.ToString());
                     }
                 }
             }
