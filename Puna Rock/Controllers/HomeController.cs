@@ -94,11 +94,10 @@ namespace Puna_Rock.Controllers
                 {
                     foreach (var temp in item.Value)
                     {
-                        int i = 0;
                         if (temp != "")
                         {
                             sheetsValues.Add(new List<object>());
-                            sheetsValues[0].Add(item.Value[i++].ToString());
+                            sheetsValues[0].Add(item.Value[0].ToString());
                         }
                     }
                 }
