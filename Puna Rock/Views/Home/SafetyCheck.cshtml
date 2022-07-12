@@ -2,28 +2,30 @@
 }
 
 <div class="text-center">
-    <h2>Pre-Shift Inspection</h2>
+    <h2>Excavator Pre-Shift Inspection</h2>
 </div>
 
-
-<div>
-    <form id = "safetyCheck" method="post" runat="server">
+@{
+    if (ViewBag.SuccessMessage == null)
+    {
+    <div id="SafetyForm">
+        <form id = "safetyCheck" method="post" runat="server">
         <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required>
+        <input type="date" id="date" name="date" min="2022-01-01" required>
         <br/>
         <br/>
         <label for="EquipNo">Equipment Number:</label>
-          <select name="EquipNo">
-            @foreach(var Item in Model.SafetyCheck)
+        <select name="EquipNo">
+        @foreach(var Item in Model.SafetyCheck)
+        {
+            if(Item.Type == "Equipment")
             {
-                if(Item.Type == "Equipment")
-                {
-                    <option value = "@Item.Id">@Item.Data</option>
-                }
+                <option value = "@Item.Id">@Item.Data</option>
             }
-          </select>
-          <br/>
-          <br/>
+        }
+        </select>
+        <br/>
+        <br/>
         @{int q = 1;}
         @foreach(var Item in Model.SafetyCheck)
         {
@@ -40,8 +42,8 @@
                 <label for="tag-out">Tag-Out</label><br/>
                 <input type ="text" id="@element" name="@Item.Id" placeholder="Enter Comment" style="display: none;">
                 </p>
+                }
             }
-        }
         <script>
             function tag_clicked(id) {
                 document.getElementById(id).style.display = "inline";
@@ -54,7 +56,30 @@
                 document.getElementById(id).required = false;
             }
         </script>
-
-      <input type="submit" name="submit" value="Submit"/>
-    </form>
-</div>
+        <input type="submit" id ="submit" name="submit" value="Submit"/>
+        </form>
+    </div>
+    }
+    else
+    {
+    <div>
+        <br/>
+        <h4 style="text-align:center">Your responses have been recorded<br/>
+        You will be redirected to the <a href="/Home">Home Page<a/> in <span id="counter">7</span> second(s)...
+        </h4>
+        <script>
+            function countdown(){
+                var i =document.getElementById('counter');
+                if(parseInt(i.innerHTML)<=0){
+                    location.href ='/Home';
+                }
+                else{
+                    i.innerHTML = parseInt(i.innerHTML)-1;
+                }
+            }
+            setInterval(function(){countdown()},1000);
+            countdown();
+        </script>
+    </div>
+    }
+}

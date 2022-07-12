@@ -14,7 +14,7 @@ namespace Puna_Rock.Controllers
     public class HomeController : Controller
     {
         private string spreadsheetId = "19ZzHAu0oKC68hdrAc2uDYlj4MH4HRZSdIaPnblsXg70";
-        private string worksheetName = "Sheet1";
+        private string SafetySheet = "SafetyCheck";
 
         private readonly ILogger<HomeController> _logger;
 
@@ -38,6 +38,7 @@ namespace Puna_Rock.Controllers
             var SafetyCheck = SafetyCheckService.GetData();
             dynamic model = new ExpandoObject();
             model.SafetyCheck = SafetyCheck;
+            ViewBag.SuccessMessage = null;
             return View(model);
         }
         [HttpPost]
@@ -47,12 +48,12 @@ namespace Puna_Rock.Controllers
             IList<IList<object>> sheetsValues = new List<IList<object>>();
             foreach (var item in form)
             {
-                if(item.Key.ToString()!="submit" && item.Key.ToString() != "__RequestVerificationToken")
+                if (item.Key.ToString()!="submit" && item.Key.ToString() != "__RequestVerificationToken")
                 {
                     sheetsValues.Add(new List<object>());
                     sheetsValues[0].Add(item.Value[0].ToString());
                     sheetsValues.Add(new List<object>());
-                    if (item.Value.Count > 1)
+                    if (item.Value.Count > 1 && item.Value[0] != "Good" && item.Value[0] !="Caution")
                     {
                         sheetsValues[0].Add(item.Value[1].ToString());
                     }
@@ -62,8 +63,9 @@ namespace Puna_Rock.Controllers
                     }
                 }
             }
-            sheet.Append(spreadsheetId, worksheetName, sheetsValues);
-            return RedirectToAction("Index");
+            sheet.Append(spreadsheetId, SafetySheet, sheetsValues);
+            ViewBag.SuccessMessage = "Success";
+            return View();
         }
 
 
