@@ -23,7 +23,20 @@ namespace Puna_Rock.Controllers
             UserMgr = userManager;
             SignInMgr = signInManager;
         }
-        
+        public async Task<IActionResult> Login()
+        {
+            var result = await SignInMgr.PasswordSignInAsync("TestUser","Test-123",false,false);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index","Home");
+            }
+            else
+            {
+                ViewBag.Result = "result is: " + result.ToString();
+            }
+            return View();
+        }
+
         public async Task<IActionResult> Register()
         {
             try
@@ -36,7 +49,7 @@ namespace Puna_Rock.Controllers
                     user.UserName = "TestUser";
                     user.Email = "TestUser@test.com";
 
-                    IdentityResult result = await UserMgr.CreateAsync(user,"Test");
+                    IdentityResult result = await UserMgr.CreateAsync(user,"Test-123");
                     ViewBag.Message = "User was created";
                 }
             }

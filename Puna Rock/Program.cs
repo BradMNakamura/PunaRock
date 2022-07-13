@@ -17,7 +17,7 @@ services.AddAuthentication().AddGoogle(googleOptions =>
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("MySQL");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<IdentityAppContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -28,7 +28,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddIdentity<AppUser, AppRoles>(options =>
 {
     options.User.RequireUniqueEmail = true;
-    options.SignIn.RequireConfirmedAccount = true;
+    //options.SignIn.RequireConfirmedAccount = true;
 }).AddEntityFrameworkStores<IdentityAppContext>();
 
 builder.Services.AddRazorPages();

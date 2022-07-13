@@ -5,10 +5,12 @@ namespace Puna_Rock.Models
 {
     public class AppUser : IdentityUser<int>
     {
+        /*
         [Required]
         public string UserName { get; set; }
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+        */
     }
 }
