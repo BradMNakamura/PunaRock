@@ -54,7 +54,17 @@
 
 
                     </ul>
-                    <partial name="_LoginPartial" />
+                    @*<partial name="_LoginPartial" />*@
+                    <li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-controller="Account" asp-action="Logout">@User.Identity.Name, Logout</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Login">Login</a>
+                    }
+                    </li>
                 </div>
             </div>
         </nav>

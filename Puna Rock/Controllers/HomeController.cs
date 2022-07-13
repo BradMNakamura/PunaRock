@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Dynamic;
 using SheetsQuickstart;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Puna_Rock.Controllers
 {
@@ -15,6 +16,7 @@ namespace Puna_Rock.Controllers
     {
         private string spreadsheetId = "19ZzHAu0oKC68hdrAc2uDYlj4MH4HRZSdIaPnblsXg70";
         private string SafetySheet = "SafetyCheck";
+        
 
         private readonly ILogger<HomeController> _logger;
 
@@ -39,6 +41,10 @@ namespace Puna_Rock.Controllers
             dynamic model = new ExpandoObject();
             model.SafetyCheck = SafetyCheck;
             ViewBag.SuccessMessage = null;
+            if (User.Identity.IsAuthenticated == true)
+            {
+                Console.WriteLine(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            }
             return View(model);
         }
         [HttpPost]

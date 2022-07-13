@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Puna_Rock.Services;
 using Pomelo.EntityFrameworkCore;
 using Puna_Rock.Data;
+using Puna_Rock.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -20,11 +21,20 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
+/*
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+*/
+builder.Services.AddIdentity<AppUser, AppRoles>(options =>
+{
+    options.User.RequireUniqueEmail = true;
+    options.SignIn.RequireConfirmedAccount = true;
+}).AddEntityFrameworkStores<IdentityAppContext>();
+
 builder.Services.AddRazorPages();
 builder.Services.AddTransient<JsonFileSafetyCheckService>();
+
+
 
 var app = builder.Build();
 
