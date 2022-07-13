@@ -1,5 +1,10 @@
 ﻿@{
 }
+<title>@ViewBag.Title</title>
+@{
+     ViewBag.Title = "Scale Tickets";
+}
+
 <div class="text-center">
     <h2>Scale Tickets</h2>
 </div>
@@ -15,7 +20,6 @@
             <input type="date" id="ticketDate" name="ticketDate" required>
             <br />
             <br />
-
             <label for="customerList">Customer List:</label>
             <select name="customerList">
             @foreach(var Item in Model.ScaleTickets)
@@ -54,17 +58,6 @@
             <br />
             <label for="netWeight">Net Weight:</label>       
             <div id="calculatedNetWeight">0</div>       
-            @*
-            <input type="button" id="netWeight" value="Calculate net weight" onclick="calculateNetWeight()">
-            <script runat="server">              
-                function calculateNetWeight() {
-                    var gWeight = parseFloat(document.getElementById("grossWeight").value);
-                    var tWeight = parseFloat(document.getElementById("tareWeight").value);
-                    var nWeight = gWeight - tWeight;
-                    if (nWeight > 0) document.getElementById("calculatedNetWeight").innerHTML = nWeight;                   
-                }
-            </script>
-            *@
             <script type="text/javascript">
                 function calculateNetWeight() {
                     var txtFirstNo = document.getElementById('grossWeight').value;
@@ -97,5 +90,4 @@
             <input type="submit" id = "submit" name="submit" value="Submit"/>
         </div>      
     </form>
-
 </div>

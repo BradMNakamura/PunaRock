@@ -14,8 +14,8 @@ namespace Puna_Rock.Controllers
     public class HomeController : Controller
     {
         private string spreadsheetId = "19ZzHAu0oKC68hdrAc2uDYlj4MH4HRZSdIaPnblsXg70";
-        private string worksheetName = "Sheet1";
-        private string worksheetName2 = "ScaleTickets";
+        private string SafetySheet = "SafetyCheck";
+        private string ScaleSheet = "ScaleTickets";
 
         private readonly ILogger<HomeController> _logger;
 
@@ -88,7 +88,7 @@ namespace Puna_Rock.Controllers
                     }
                 }
             }
-            sheet.Append(spreadsheetId, worksheetName2, sheetsValues);
+            sheet.Append(spreadsheetId, ScaleSheet, sheetsValues);
             return RedirectToAction("Index");
         }
         public IActionResult Placeholder()
