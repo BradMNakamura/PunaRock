@@ -70,9 +70,10 @@ label {
             <input type="number" id="tareWeight" step="0.01" min="0" name="tareWeight" placeholder="0" onkeyup="calculateNetWeight()" required>
             <br />
             <br />
-
+            <div style="display:flex; flex-direction:row; align-items: center">
             <label for="netWeight">Net Weight</label>       
-            <div id="calculatedNetWeight">0</div>       
+            <div id="calculatedNetWeight">0</div> 
+            </div>      
             <script type="text/javascript">
                 function calculateNetWeight() {
                     var txtFirstNo = document.getElementById('grossWeight').value;
