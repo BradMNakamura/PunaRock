@@ -10,7 +10,7 @@ using SheetsQuickstart;
 using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
-
+using Microsoft.AspNetCore.Authentication;
 
 namespace Puna_Rock.Controllers
 {
@@ -23,22 +23,32 @@ namespace Puna_Rock.Controllers
             UserMgr = userManager;
             SignInMgr = signInManager;
         }
+        [HttpGet]
         public async Task<IActionResult> Login()
         {
-            var result = await SignInMgr.PasswordSignInAsync("TestUser","Test-123",false,false);
-            /*
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index","Home");
-            }
-            else
-            {
-                ViewBag.Result = "result is: " + result.ToString();
-            }
-            */
-            ViewBag.Result = "result is: " + result.ToString();
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(Login userModel)
+        {
+            if (ModelState.IsValid)
+            {
+                AppUser user = await UserMgr.FindByEmailAsync(userModel.Email);
+                if (user != null)
+                {
+                    await SignInMgr.SignOutAsync();
+                    var result = await SignInMgr.PasswordSignInAsync(user, userModel.Password, false, false);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction(nameof(HomeController.Index), "Home");
+                    }
+                }
+                ModelState.AddModelError(nameof(userModel.Email), "Login Failed: Invalid Email or Password");
+            }
+            return View(userModel);
+        }
+
         public async Task<IActionResult> Logout()
         {
             await SignInMgr.SignOutAsync();
@@ -46,25 +56,28 @@ namespace Puna_Rock.Controllers
         }
         public async Task<IActionResult> Register()
         {
-            try
-            {
-                ViewBag.Message = "User already registered";
-                AppUser user = await UserMgr.FindByNameAsync("TestUser");
-                if (user == null)
-                {
-                    user = new AppUser();
-                    user.UserName = "TestUser";
-                    user.Email = "TestUser@test.com";
-
-                    IdentityResult result = await UserMgr.CreateAsync(user,"Test-123");
-                    ViewBag.Message = "User was created";
-                }
-            }
-            catch(Exception e)
-            {
-                ViewBag.Message = e.Message;
-            }
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(Register userModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new AppUser()
+                {
+                    UserName = userModel.Email,
+                    Email = userModel.Email,
+                };
+                var result = await UserMgr.CreateAsync(user, userModel.Password);
+                if (result.Succeeded)
+                {
+                    await SignInMgr.SignInAsync(user,false);
+                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                }
+            }
+            return View(userModel);
+        }
+
     }
 }
