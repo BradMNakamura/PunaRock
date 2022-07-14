@@ -57,7 +57,7 @@ namespace Puna_Rock.Controllers
                     {
                         sheetsValues[0].Add(item.Value[1].ToString());
                     }
-                    else if(item.Key.ToString()!="date" && item.Key.ToString()!="EquipNo")
+                    else if(item.Key.ToString()!="date" && item.Key.ToString()!="EquipNo" && item.Key.ToString() != "hourmeter")
                     {
                         sheetsValues[0].Add("");
                     }

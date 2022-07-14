@@ -26,6 +26,10 @@
         </select>
         <br/>
         <br/>
+        <label for="hourmeter">Hour Meter Reading</label>
+        <input type="number" id="hourmeter" name="hourmeter" min="0" placeholder="0" required></input>
+        <br/>
+        <br/>
         @{int q = 1;}
         @foreach(var Item in Model.SafetyCheck)
         {
