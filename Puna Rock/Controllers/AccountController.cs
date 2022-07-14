@@ -26,6 +26,7 @@ namespace Puna_Rock.Controllers
         public async Task<IActionResult> Login()
         {
             var result = await SignInMgr.PasswordSignInAsync("TestUser","Test-123",false,false);
+            /*
             if (result.Succeeded)
             {
                 return RedirectToAction("Index","Home");
@@ -34,6 +35,8 @@ namespace Puna_Rock.Controllers
             {
                 ViewBag.Result = "result is: " + result.ToString();
             }
+            */
+            ViewBag.Result = "result is: " + result.ToString();
             return View();
         }
         public async Task<IActionResult> Logout()
