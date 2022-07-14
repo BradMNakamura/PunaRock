@@ -1,5 +1,19 @@
 ﻿@{
 }
+<head>
+  <title></title>
+  <style type="text/css">
+
+label:after {
+  content: ": ";
+}
+
+label {
+  padding: 6px;
+}
+  </style>
+</head>
+
 <title>@ViewBag.Title</title>
 @{
      ViewBag.Title = "Scale Tickets";
@@ -12,15 +26,15 @@
 <div>
     <form id="scaleTickets" method="post" runat="server">
         <div style= padding: 15px; min-width:100px; display: inline-block">
-            <label for="ticketNumber">Ticket Number:</label>
+            <label for="ticketNumber">Ticket Number</label>
             <input type="number" id="ticketNumber" min="0" name="ticketNumber" required>
             <br />
             <br />
-            <label for="ticketDate">Ticket Date:</label>
+            <label for="ticketDate">Ticket Date</label>
             <input type="date" id="ticketDate" name="ticketDate" required>
             <br />
             <br />
-            <label for="customerList">Customer List:</label>
+            <label for="customerList">Customer List</label>
             <select name="customerList">
             @foreach(var Item in Model.ScaleTickets)
             {
@@ -32,7 +46,7 @@
             </select>
             <br />
             <br />
-            <label for="productList">Product List:</label>
+            <label for="productList">Product List</label>
             <select name="productList">
             @foreach(var Item in Model.ScaleTickets)
             {
@@ -44,19 +58,20 @@
             </select>
             <br />
             <br />
-            <label for="jobName">Job Name:</label>
+            <label for="jobName">Job Name</label>
             <input type="text" id="jobName" name="jobName" required>
             <br />
             <br />
-            <label for="grossWeight">Gross Weight:</label>
+            <label for="grossWeight">Gross Weight</label>
             <input type="number" id="grossWeight" step="0.01" min="0" name="grossWeight" placeholder="0" onkeyup="calculateNetWeight()" required>
             <br />
             <br />
-            <label for="tareWeight">Tare Weight:</label>
+            <label for="tareWeight">Tare Weight</label>
             <input type="number" id="tareWeight" step="0.01" min="0" name="tareWeight" placeholder="0" onkeyup="calculateNetWeight()" required>
             <br />
             <br />
-            <label for="netWeight">Net Weight:</label>       
+
+            <label for="netWeight">Net Weight</label>       
             <div id="calculatedNetWeight">0</div>       
             <script type="text/javascript">
                 function calculateNetWeight() {
@@ -83,7 +98,7 @@
             </script>
             <br />
             <br />
-            <label for="digitalSignature">Digital Signature:</label>
+            <label for="digitalSignature">Digital Signature</label>
             <input type="text" id="digitalSignature" name="digitalSignature" required>
             <br />
             <br />
