@@ -36,7 +36,11 @@ namespace Puna_Rock.Controllers
             }
             return View();
         }
-
+        public async Task<IActionResult> Logout()
+        {
+            await SignInMgr.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
         public async Task<IActionResult> Register()
         {
             try
