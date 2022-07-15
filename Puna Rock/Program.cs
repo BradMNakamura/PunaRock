@@ -25,7 +25,6 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 builder.Services.AddTransient<JsonFileSafetyCheckService>();
-builder.Services.AddTransient<JsonFileEquipmentService>();
 builder.Services.AddTransient<JsonFileScaleTicketsService>();
 
 var app = builder.Build();

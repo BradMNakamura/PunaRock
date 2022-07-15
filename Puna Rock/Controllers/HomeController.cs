@@ -31,7 +31,8 @@ namespace Puna_Rock.Controllers
             SafetyCheckService = safetyCheckService;
             EquipmentService = equipmentService;
             ScaleTicketsService = scaleTicketsService;
-        }
+
+        } 
         public IActionResult Index()
         {
             return View();
@@ -42,11 +43,10 @@ namespace Puna_Rock.Controllers
         }
         public IActionResult SafetyCheck()
         {
-            var SafetyCheck = SafetyCheckService.GetQuestions();
-            var Equipment = EquipmentService.GetEquip();
+            var SafetyCheck = SafetyCheckService.GetData();
             dynamic model = new ExpandoObject();
             model.SafetyCheck = SafetyCheck;
-            model.Equipment = Equipment;
+            ViewBag.SuccessMessage = null;
             return View(model);
         }
         public IActionResult ScaleTickets()
@@ -91,6 +91,34 @@ namespace Puna_Rock.Controllers
             sheet.Append(spreadsheetId, ScaleSheet, sheetsValues);
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public IActionResult SafetyCheck(IFormCollection form)
+        {
+            GoogleSheets sheet = new GoogleSheets();
+            IList<IList<object>> sheetsValues = new List<IList<object>>();
+            foreach (var item in form)
+            {
+                if (item.Key.ToString()!="submit" && item.Key.ToString() != "__RequestVerificationToken")
+                {
+                    sheetsValues.Add(new List<object>());
+                    sheetsValues[0].Add(item.Value[0].ToString());
+                    sheetsValues.Add(new List<object>());
+                    if (item.Value.Count > 1 && item.Value[0] != "Good")
+                    {
+                        sheetsValues[0].Add(item.Value[1].ToString());
+                    }
+                    else if(item.Key.ToString()!="date" && item.Key.ToString()!="EquipNo" && item.Key.ToString() != "hourmeter")
+                    {
+                        sheetsValues[0].Add("");
+                    }
+                }
+            }
+            sheet.Append(spreadsheetId, SafetySheet, sheetsValues);
+            ViewBag.SuccessMessage = "Success";
+            return View();
+        }
+
+
         public IActionResult Placeholder()
         {
             return View();
