@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Dynamic;
 using SheetsQuickstart;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Puna_Rock.Controllers
 {
@@ -18,6 +19,8 @@ namespace Puna_Rock.Controllers
         private string ScaleSheet = "ScaleTickets";
         //private string spreadsheetId = "1s7asiUgljjTxqMfFQGHAKKOl3oBDGpL6SggzBnen-gM";
         private string worksheetName = "Sheet1";
+
+        
 
         private readonly ILogger<HomeController> _logger;
 
@@ -46,6 +49,10 @@ namespace Puna_Rock.Controllers
             dynamic model = new ExpandoObject();
             model.SafetyCheck = SafetyCheck;
             ViewBag.SuccessMessage = null;
+            if (User.Identity.IsAuthenticated == true)
+            {
+                Console.WriteLine(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            }
             return View(model);
         }
         public IActionResult ScaleTickets()
