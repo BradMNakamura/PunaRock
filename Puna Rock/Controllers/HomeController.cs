@@ -13,6 +13,9 @@ namespace Puna_Rock.Controllers
 {
     public class HomeController : Controller
     {
+        private string spreadsheetId = "19ZzHAu0oKC68hdrAc2uDYlj4MH4HRZSdIaPnblsXg70";
+        private string SafetySheet = "SafetyCheck";
+        private string ScaleSheet = "ScaleTickets";
         private string spreadsheetId = "1s7asiUgljjTxqMfFQGHAKKOl3oBDGpL6SggzBnen-gM";
         private string worksheetName = "Sheet1";
 
@@ -20,14 +23,15 @@ namespace Puna_Rock.Controllers
 
         public JsonFileSafetyCheckService SafetyCheckService;
 
-        public JsonFileEquipmentService EquipmentService;
+        public JsonFileScaleTicketsService ScaleTicketsService;
         public HomeController(ILogger<HomeController> logger, JsonFileSafetyCheckService safetyCheckService,
-                JsonFileEquipmentService equipmentService)
+            JsonFileScaleTicketsService scaleTicketsService)
         {
             _logger = logger;
             SafetyCheckService = safetyCheckService;
-            EquipmentService = equipmentService;
-        }
+            ScaleTicketsService = scaleTicketsService;
+
+        } 
         public IActionResult Index()
         {
             return View();
@@ -38,12 +42,53 @@ namespace Puna_Rock.Controllers
         }
         public IActionResult SafetyCheck()
         {
-            var SafetyCheck = SafetyCheckService.GetQuestions();
-            var Equipment = EquipmentService.GetEquip();
+            var SafetyCheck = SafetyCheckService.GetData();
             dynamic model = new ExpandoObject();
             model.SafetyCheck = SafetyCheck;
-            model.Equipment = Equipment;
+            ViewBag.SuccessMessage = null;
             return View(model);
+        }
+        public IActionResult ScaleTickets()
+        {
+            var ScaleTickets = ScaleTicketsService.GetList();
+            dynamic model = new ExpandoObject();
+            model.ScaleTickets = ScaleTickets;
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult ScaleTickets(IFormCollection form)
+        {
+            GoogleSheets sheet = new GoogleSheets();
+            IList<IList<object>> sheetsValues = new List<IList<object>>();
+            decimal gWeight = 0;
+            decimal tWeight = 0;
+            decimal nWeight = 0;
+            foreach (var item in form)
+            {               
+                if (item.Key.ToString()!="submit" && item.Key.ToString()!= "__RequestVerificationToken")
+                {
+                    sheetsValues.Add(new List<object>());
+                    sheetsValues[0].Add(item.Value[0].ToString());
+                    sheetsValues.Add(new List<object>());                  
+                    if(item.Value.Count > 1)
+                    {
+                        sheetsValues[0].Add(item.Value[1].ToString());
+                    }
+                    else if(item.Key.ToString()=="grossWeight")
+                    {
+                        gWeight = System.Convert.ToDecimal(item.Value[0].ToString());
+                    }
+                    else if (item.Key.ToString() == "tareWeight")
+                    {
+                        tWeight = System.Convert.ToDecimal(item.Value[0].ToString());
+
+                        nWeight = gWeight - tWeight;
+                        sheetsValues[0].Add(nWeight.ToString());
+                    }
+                }
+            }
+            sheet.Append(spreadsheetId, ScaleSheet, sheetsValues);
+            return RedirectToAction("Index");
         }
         [HttpPost]
         public IActionResult SafetyCheck(IFormCollection form)
@@ -52,23 +97,24 @@ namespace Puna_Rock.Controllers
             IList<IList<object>> sheetsValues = new List<IList<object>>();
             foreach (var item in form)
             {
-                if(item.Key.ToString()!="submit" && item.Key.ToString() != "__RequestVerificationToken")
+                if (item.Key.ToString()!="submit" && item.Key.ToString() != "__RequestVerificationToken")
                 {
                     sheetsValues.Add(new List<object>());
                     sheetsValues[0].Add(item.Value[0].ToString());
                     sheetsValues.Add(new List<object>());
-                    if (item.Value.Count > 1)
+                    if (item.Value.Count > 1 && item.Value[0] != "Good")
                     {
                         sheetsValues[0].Add(item.Value[1].ToString());
                     }
-                    else if(item.Key.ToString()!="date" && item.Key.ToString()!="EquipNo")
+                    else if(item.Key.ToString()!="date" && item.Key.ToString()!="EquipNo" && item.Key.ToString() != "hourmeter")
                     {
                         sheetsValues[0].Add("");
                     }
                 }
             }
-            sheet.Append(spreadsheetId, worksheetName, sheetsValues);
-            return RedirectToAction("Index");
+            sheet.Append(spreadsheetId, SafetySheet, sheetsValues);
+            ViewBag.SuccessMessage = "Success";
+            return View();
         }
 
 
