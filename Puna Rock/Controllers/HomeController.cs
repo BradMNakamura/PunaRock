@@ -6,22 +6,24 @@ using Puna_Rock.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
 using System.Dynamic;
+using SheetsQuickstart;
+using System.Collections.Generic;
 
 namespace Puna_Rock.Controllers
 {
     public class HomeController : Controller
     {
+        private string spreadsheetId = "19ZzHAu0oKC68hdrAc2uDYlj4MH4HRZSdIaPnblsXg70";
+        private string SafetySheet = "SafetyCheck";
+
         private readonly ILogger<HomeController> _logger;
 
         public JsonFileSafetyCheckService SafetyCheckService;
 
-        public JsonFileEquipmentService EquipmentService;
-        public HomeController(ILogger<HomeController> logger, JsonFileSafetyCheckService safetyCheckService,
-                JsonFileEquipmentService equipmentService)
+        public HomeController(ILogger<HomeController> logger, JsonFileSafetyCheckService safetyCheckService)
         {
             _logger = logger;
             SafetyCheckService = safetyCheckService;
-            EquipmentService = equipmentService;
         }
         public IActionResult Index()
         {
@@ -33,13 +35,40 @@ namespace Puna_Rock.Controllers
         }
         public IActionResult SafetyCheck()
         {
-            var SafetyCheck = SafetyCheckService.GetQuestions();
-            var Equipment = EquipmentService.GetEquip();
+            var SafetyCheck = SafetyCheckService.GetData();
             dynamic model = new ExpandoObject();
             model.SafetyCheck = SafetyCheck;
-            model.Equipment = Equipment;
+            ViewBag.SuccessMessage = null;
             return View(model);
         }
+        [HttpPost]
+        public IActionResult SafetyCheck(IFormCollection form)
+        {
+            GoogleSheets sheet = new GoogleSheets();
+            IList<IList<object>> sheetsValues = new List<IList<object>>();
+            foreach (var item in form)
+            {
+                if (item.Key.ToString()!="submit" && item.Key.ToString() != "__RequestVerificationToken")
+                {
+                    sheetsValues.Add(new List<object>());
+                    sheetsValues[0].Add(item.Value[0].ToString());
+                    sheetsValues.Add(new List<object>());
+                    if (item.Value.Count > 1 && item.Value[0] != "Good")
+                    {
+                        sheetsValues[0].Add(item.Value[1].ToString());
+                    }
+                    else if(item.Key.ToString()!="date" && item.Key.ToString()!="EquipNo" && item.Key.ToString() != "hourmeter")
+                    {
+                        sheetsValues[0].Add("");
+                    }
+                }
+            }
+            sheet.Append(spreadsheetId, SafetySheet, sheetsValues);
+            ViewBag.SuccessMessage = "Success";
+            return View();
+        }
+
+
         public IActionResult Placeholder()
         {
             return View();
