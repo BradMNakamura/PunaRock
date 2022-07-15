@@ -75,6 +75,11 @@ namespace Puna_Rock.Controllers
                     await SignInMgr.SignInAsync(user,false);
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
+                else
+                {
+                    //ViewBag.Err = result;
+                    ModelState.AddModelError(nameof(userModel.Email), "Email already in use");
+                }
             }
             return View(userModel);
         }

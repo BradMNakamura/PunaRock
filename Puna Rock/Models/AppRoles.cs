@@ -2,7 +2,7 @@
 
 namespace Puna_Rock.Models
 {
-    public class AppRoles : IdentityRole<int>
+    public class AppRoles : IdentityRole
     {
 
     }
