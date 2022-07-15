@@ -16,7 +16,7 @@ namespace Puna_Rock.Controllers
         private string spreadsheetId = "19ZzHAu0oKC68hdrAc2uDYlj4MH4HRZSdIaPnblsXg70";
         private string SafetySheet = "SafetyCheck";
         private string ScaleSheet = "ScaleTickets";
-        private string spreadsheetId = "1s7asiUgljjTxqMfFQGHAKKOl3oBDGpL6SggzBnen-gM";
+        //private string spreadsheetId = "1s7asiUgljjTxqMfFQGHAKKOl3oBDGpL6SggzBnen-gM";
         private string worksheetName = "Sheet1";
 
         private readonly ILogger<HomeController> _logger;
