@@ -53,7 +53,7 @@ namespace Puna_Rock.Controllers
                     sheetsValues.Add(new List<object>());
                     sheetsValues[0].Add(item.Value[0].ToString());
                     sheetsValues.Add(new List<object>());
-                    if (item.Value.Count > 1 && item.Value[0] != "Good" && item.Value[0] !="Caution")
+                    if (item.Value.Count > 1 && item.Value[0] != "Good")
                     {
                         sheetsValues[0].Add(item.Value[1].ToString());
                     }
