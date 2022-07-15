@@ -1,0 +1,112 @@
+﻿@{
+}
+<head>
+  <title></title>
+  <style type="text/css">
+
+label:after {
+  content: ": ";
+}
+
+label {
+  padding: 6px;
+}
+  </style>
+</head>
+
+<title>@ViewBag.Title</title>
+@{
+     ViewBag.Title = "Scale Tickets";
+}
+
+<div style="padding-bottom:20px" class="text-center">
+    <h2>Scale Tickets</h2>
+</div>
+
+<div>
+    <form id="scaleTickets" method="post" runat="server">
+        <div style= padding: 15px; min-width:100px; display: inline-block">
+            <label for="ticketNumber">Ticket Number</label>
+            <input type="number" id="ticketNumber" min="0" name="ticketNumber" required>
+            <br />
+            <br />
+            <label for="ticketDate">Ticket Date</label>
+            <input type="date" id="ticketDate" name="ticketDate" required>
+            <br />
+            <br />
+            <label for="customerList">Customer List</label>
+            <select name="customerList">
+            @foreach(var Item in Model.ScaleTickets)
+            {
+                if(Item.Type == "Customer")
+                {
+                    <option value = "@Item.Id">@Item.Id</option>
+                }               
+            }
+            </select>
+            <br />
+            <br />
+            <label for="productList">Product List</label>
+            <select name="productList">
+            @foreach(var Item in Model.ScaleTickets)
+            {
+                if(Item.Type == "Product")
+                {
+                    <option value = "@Item.Id">@Item.Id</option>
+                }               
+            }
+            </select>
+            <br />
+            <br />
+            <label for="jobName">Job Name</label>
+            <input type="text" id="jobName" name="jobName" required>
+            <br />
+            <br />
+            <label for="grossWeight">Gross Weight</label>
+            <input type="number" id="grossWeight" step="0.01" min="0" name="grossWeight" placeholder="0" onkeyup="calculateNetWeight()" required>
+            <br />
+            <br />
+            <label for="tareWeight">Tare Weight</label>
+            <input type="number" id="tareWeight" step="0.01" min="0" name="tareWeight" placeholder="0" onkeyup="calculateNetWeight()" required>
+            <br />
+            <br />
+            <div style="display:flex; flex-direction:row; align-items: center">
+            <label for="netWeight">Net Weight</label>       
+            <div id="calculatedNetWeight">0</div> 
+            </div>      
+            <script type="text/javascript">
+                function calculateNetWeight() {
+                    var txtFirstNo = document.getElementById('grossWeight').value;
+                    var txtSecondNo = document.getElementById('tareWeight').value;
+                    var result = parseFloat(txtFirstNo) - parseFloat(txtSecondNo);
+                    if (!isNaN(result) && result > 0) {
+                        document.getElementById('calculatedNetWeight').innerHTML = result;
+                        document.getElementById('submit').disabled = false;
+                    }
+                    else if(result < 0){
+                        document.getElementById('calculatedNetWeight').innerHTML = result;
+                        document.getElementById('submit').disabled = true;
+                    }
+                    else if(result == 0){
+                        document.getElementById('calculatedNetWeight').innerHTML = '0';
+                        document.getElementById('submit').disabled = false;
+                    }
+                    else{
+                        document.getElementById('calculatedNetWeight').innerHTML = '0';
+                        document.getElementById('submit').disabled = true;
+                    }
+                }
+            </script>
+            <br />
+            <br />
+            <label for="digitalSignature">Digital Signature</label>
+            <input type="text" id="digitalSignature" name="digitalSignature" required>
+            <br />
+            <br />
+            <div style="display:flex; align-items:center; justify-content: center">
+                <input type="submit" id = "submit" name="submit" value="Submit"/>
+            </div>
+
+        </div>      
+    </form>
+</div>
