@@ -16,6 +16,8 @@ namespace Puna_Rock.Controllers
         private string spreadsheetId = "19ZzHAu0oKC68hdrAc2uDYlj4MH4HRZSdIaPnblsXg70";
         private string SafetySheet = "SafetyCheck";
         private string ScaleSheet = "ScaleTickets";
+        //private string spreadsheetId = "1s7asiUgljjTxqMfFQGHAKKOl3oBDGpL6SggzBnen-gM";
+        private string worksheetName = "Sheet1";
 
         private readonly ILogger<HomeController> _logger;
 
@@ -121,6 +123,34 @@ namespace Puna_Rock.Controllers
             return View();
         }
 
+        public IActionResult TimeSheet()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult TimeSheet(IFormCollection form)
+        {
+            GoogleSheets sheet = new GoogleSheets();
+            IList<IList<object>> sheetsValues = new List<IList<object>>();
+            foreach (var item in form)
+            {   
+                // Just to see the pushed info
+                Console.WriteLine(item);
+                if (item.Key.ToString() != "submit" && item.Key.ToString() != "__RequestVerificationToken")
+                {
+                    foreach (var temp in item.Value)
+                    {
+                        if (temp != "")
+                        {
+                            sheetsValues.Add(new List<object>());
+                            sheetsValues[0].Add(item.Value[0].ToString());
+                        }
+                    }
+                }
+            }
+            sheet.Append(spreadsheetId, worksheetName, sheetsValues);
+            return RedirectToAction("Index");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
