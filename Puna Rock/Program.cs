@@ -33,6 +33,7 @@ builder.Services.AddIdentity<AppUser, AppRoles>(options =>
 
 builder.Services.AddRazorPages();
 builder.Services.AddTransient<JsonFileSafetyCheckService>();
+builder.Services.AddTransient<JsonFileScaleTicketsService>();
 
 
 

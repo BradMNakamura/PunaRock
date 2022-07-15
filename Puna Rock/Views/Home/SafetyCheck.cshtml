@@ -26,6 +26,10 @@
         </select>
         <br/>
         <br/>
+        <label for="hourmeter">Hour Meter Reading</label>
+        <input type="number" id="hourmeter" name="hourmeter" min="0" placeholder="0" required></input>
+        <br/>
+        <br/>
         @{int q = 1;}
         @foreach(var Item in Model.SafetyCheck)
         {
@@ -36,14 +40,17 @@
                 <p><b>@Item.Data</b><br/>
                 <input type = "radio" id="good" name = "@Item.Id" value="Good" onclick="change('@element')" required>
                 <label for="good">Good</label>
-                <input type = "radio" id="caution" name = "@Item.Id" value="Caution" onclick="change('@element')">
+                <input type = "radio" id="caution" name = "@Item.Id" value="Caution" onclick="tag_clicked('@element')">
                 <label for="caution">Caution</label>
                 <input type = "radio" id="tag-out" name = "@Item.Id" value="Tag-Out" onclick="tag_clicked('@element')">
                 <label for="tag-out">Tag-Out</label><br/>
                 <input type ="text" id="@element" name="@Item.Id" placeholder="Enter Comment" style="display: none;">
                 </p>
-                }
             }
+        }
+        <label for="signature">Digital Signature: </label>
+        <input type="text" id="signature" name="signature" placeholder="Enter Your Name" required>
+        <br/>
         <script>
             function tag_clicked(id) {
                 document.getElementById(id).style.display = "inline";
