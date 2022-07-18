@@ -123,7 +123,10 @@ namespace Puna_Rock.Controllers
             ViewBag.SuccessMessage = "Success";
             return View();
         }
-
+        public IActionResult LoaderReplacements()
+        {
+            return View();
+        }
 
         public IActionResult Placeholder()
         {
