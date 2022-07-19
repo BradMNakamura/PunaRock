@@ -27,12 +27,15 @@ namespace Puna_Rock.Controllers
         public JsonFileSafetyCheckService SafetyCheckService;
 
         public JsonFileScaleTicketsService ScaleTicketsService;
+
+        public JsonFileLoaderReplacementsService LoaderReplacementsService;
         public HomeController(ILogger<HomeController> logger, JsonFileSafetyCheckService safetyCheckService,
-            JsonFileScaleTicketsService scaleTicketsService)
+            JsonFileScaleTicketsService scaleTicketsService, JsonFileLoaderReplacementsService loaderReplacementsService)
         {
             _logger = logger;
             SafetyCheckService = safetyCheckService;
             ScaleTicketsService = scaleTicketsService;
+            LoaderReplacementsService = loaderReplacementsService;
 
         } 
         public IActionResult Index()
@@ -125,7 +128,10 @@ namespace Puna_Rock.Controllers
         }
         public IActionResult LoaderReplacements()
         {
-            return View();
+            var LoaderReplacements = LoaderReplacementsService.GetList();
+            dynamic model = new ExpandoObject();
+            model.LoaderReplacements = LoaderReplacements;
+            return View(model);
         }
 
         public IActionResult Placeholder()

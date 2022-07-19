@@ -1,0 +1,182 @@
+[
+  {
+    "id": "988B.2",
+    "data": "988B.2",
+    "type": "Equipment"
+  },
+  {
+    "id": "988B.3",
+    "data": "988B.3",
+    "type": "Equipment"
+  },
+  {
+    "id": "988H",
+    "data": "988H",
+    "type": "Equipment"
+  },
+  {
+    "id": "980G",
+    "data": "980G",
+    "type": "Equipment"
+  },
+  {
+    "id": "980C.1",
+    "data": "980C.1",
+    "type": "Equipment"
+  },
+  {
+    "id": "980C.2",
+    "data": "980C.2",
+    "type": "Equipment"
+  },
+  {
+    "id": "980C.2",
+    "data": "980C.2",
+    "type": "Equipment"
+  },
+  {
+    "id": "WA500.2",
+    "data": "WA500.2",
+    "type": "Equipment"
+  },
+  {
+    "id": "Skytrak",
+    "data": "Skytrak",
+    "type": "Equipment"
+  },
+  {
+    "id": "CatTH63",
+    "data": "CatTH63",
+    "type": "Equipment"
+  },
+  {
+    "id": "CatTH83",
+    "data": "CatTH83",
+    "type": "Equipment"
+  },
+  {
+    "id": "Gradall",
+    "data": "Gradall",
+    "type": "Equipment"
+  },
+  {
+    "id": "AUDIBLES",
+    "data": "AUDIBLES: Reverse Alarm? Horn?",
+    "type": "Safety"
+  },
+  {
+    "id": "LIGHTS",
+    "data": "LIGHTS: Front and Rear Flood Lights? Tail Lights? ",
+    "type": "Safety"
+  },
+  {
+    "id": "INSIDECAB",
+    "data": "INSIDE CAB: Seat Belt Condition? Gauges Working? Interior Clean? ",
+    "type": "Safety"
+  },
+  {
+    "id": "WINDOWS AND MIRRORS",
+    "data": "WINDOWS AND MIRRORS: Cracks and Visibility? Wipers?",
+    "type": "Safety"
+  },
+  {
+    "id": "FIRE EXTINGUISHER",
+    "data": "FIRE EXTINGUISHER: Expiration Date? Charged and Pin Strap? Mounted Secured?",
+    "type": "Safety"
+  },
+  {
+    "id": "SAFE ACCESS",
+    "data": "SAFE ACCESS: Ladders? Railings? Walkways?",
+    "type": "Safety"
+  },
+  {
+    "id": "BRAKES",
+    "data": "BRAKES: Service Brakes? Parking Brake?",
+    "type": "Safety"
+  },
+  {
+    "id": "ENGINE AND TRANS",
+    "data": "ENGINE AND TRANS: Engine Oil Level/Leaks? V-Belts and Hoses? Radiator Level/Leaks? Trans Oil Level/Leaks?",
+    "type": "Safety"
+  },
+  {
+    "id": "HYDRAULICS",
+    "data": "HYDRAULICS: Hyd Ram Leaks? Hyd Hose Condition? O-Ring Leaks?",
+    "type": "Safety"
+  },
+  {
+    "id": "PINS AND BUSHINGS",
+    "data": "PINS AND BUSHINGS: Pin/Bushing Play? Pins All Greased?",
+    "type": "Safety"
+  },
+  {
+    "id": "TIRES",
+    "data": "TIRES: Air Pressure? Tire Condition?",
+    "type": "Safety"
+  },
+  {
+    "id": "ANY OTHER DEFECTS",
+    "data": "ANY OTHER DEFECTS",
+    "type": "Safety"
+  },
+  {
+    "id": "Arquitola, James",
+    "data": "Arquitola, James",
+    "type": "Employee"
+  },
+  {
+    "id": "Cambra, Delbert",
+    "data": "Cambra, Delbert",
+    "type": "Employee"
+  },
+  {
+    "id": "Chartrand, Chandler",
+    "data": "Chartrand, Chandler",
+    "type": "Employee"
+  },
+  {
+    "id": "Ganiron, Robert",
+    "data": "Ganiron, Robert",
+    "type": "Employee"
+  },
+  {
+    "id": "Kuwaye, Tyson",
+    "data": "Kuwaye, Tyson",
+    "type": "Employee"
+  },
+  {
+    "id": "Pacheco, Greg",
+    "data": "Pacheco, Greg",
+    "type": "Employee"
+  },
+  {
+    "id": "Pacleb, Arthur",
+    "data": "Pacleb, Arthur",
+    "type": "Employee"
+  },
+  {
+    "id": "Quihano, Charles",
+    "data": "Quihano, Charles",
+    "type": "Employee"
+  },
+  {
+    "id": "Sumi, Izaak",
+    "data": "Sumi, Izaak",
+    "type": "Employee"
+  },
+  {
+    "id": "Sumi, Iz Boy",
+    "data": "Sumi, Iz Boy",
+    "type": "Employee"
+  },
+  {
+    "id": "Torngren, Travis",
+    "data": "Torngren, Travis",
+    "type": "Employee"
+  },
+  {
+    "id": "Wentz, Dominic",
+    "data": "Wentz, Dominic",
+    "type": "Employee"
+  }
+]

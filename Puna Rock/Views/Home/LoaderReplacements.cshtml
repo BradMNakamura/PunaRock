@@ -1,5 +1,106 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿<title>@ViewBag.Title</title>
 @{
+     ViewBag.Title = "Loader/Forklift Pre-Shift Inspection";
 }
+
+<div class="text-center">
+    <h2>Loader/Forklift Pre-Shift Inspection</h2>
+</div>
+
+<div>
+    <form id="loaderReplacements" method="post" runat="server">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+        <br />
+        <br />
+        <label for="equipNo">Equipment Number:</label>
+        <select name="equipNo" required>
+            <option value="" disabled selected>Select your option</option>
+            @foreach(var Item in Model.LoaderReplacements)
+            {
+                if(Item.Type == "Equipment")
+                {
+                    <option value = "@Item.Data">@Item.Id</option>
+                }
+            }
+        </select>
+        <br />
+        <br />
+        <label for="hourMeter">Hour Meter Reading:</label>
+        <input type="number" id="hourMeter" min="0" placeholder="0" required>
+        <br />
+        <br />
+        @{int q = 1;}
+        @foreach(var Item in Model.LoaderReplacements)
+        {
+            if(Item.Id == "ANY OTHER DEFECTS")
+            {
+                <label for="defect">Any Other Defects:</label>
+                <input type="text" id="defect"> 
+            }
+            else if(Item.Type == "Safety")
+            {
+                string element = "question " + q;
+                q++;
+                <p><b>@Item.Data</b><br/>
+                <input type = "radio" id="good" name = "@Item.Id" value="Good" onclick="change('@element')" required>
+                <label for="good">Good</label>
+                <input type = "radio" id="caution" name = "@Item.Id" value="Caution" onclick="tag_clicked('@element')">
+                <label for="caution">Caution</label>
+                <input type = "radio" id="tag-out" name = "@Item.Id" value="Tag-Out" onclick="tag_clicked('@element')">
+                <label for="tag-out">Tag-Out</label><br/>
+                <input type ="text" id="@element" name="@Item.Id" placeholder="Enter Comment" style="display: none;">
+                </p>
+            }
+        }
+        <br />
+        <br />
+        <label for="dateCorrected">Date Corrected:</label>
+        <input type="dateCorrected" id="date" name="dateCorrected">
+        <br />
+        <br />
+        <label for="tagOut">Tag Out Corrected By:</label>
+        <select name="tagOut" required>
+            <option value="" disabled selected>Select your option</option>
+            @foreach(var Item in Model.LoaderReplacements)
+            {
+                if(Item.Type == "Employee")
+                {
+                    <option value = "@Item.Id">@Item.Data</option>
+                }
+            }
+        </select>
+        <br />
+        <br />
+        <label for="correctionDesc">Description of Correction Made:</label>
+        <input type="text" id="correctionDesc" name="correctionDesc">
+        <br />
+        <br />
+        <label for="correctionImg">Image of Correction Made:</label>
+        <br />
+        <br />
+        <label for="sign">Digital Signature</label>
+        <input type="text" id="sign" name="sign">
+        <br />
+        <br />
+        <label for="operatorName">Operators Name:</label>
+        <select name="operatorName" required>
+            <option value="" disabled selected>Select your option</option>
+            @foreach(var Item in Model.LoaderReplacements)
+            {
+                if(Item.Type == "Employee")
+                {
+                    <option value = "@Item.Id">@Item.Data</option>
+                }
+            }
+        </select>
+        <br />
+        <br />
+        <label for="dateInspected">Date Inspected:</label>
+        <input type="dateInspected" id="date" name="dateInspected" required>
+        <br />
+        <br />
+        <label for="digitalSignature">Digital Signature</label>
+        <input type="text" id="digitalSignature" name="digitalSignature">
+    </form>
+</div>
