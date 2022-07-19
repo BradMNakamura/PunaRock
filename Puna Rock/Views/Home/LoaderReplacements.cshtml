@@ -61,6 +61,18 @@
                 }          
             }
         }
+        <script>
+            function tag_clicked(id) {
+                document.getElementById(id).style.display = "inline";
+                document.getElementById(id).required = true;
+            }
+        </script>
+        <script>
+            function change(id){
+                document.getElementById(id).style.display = "none";
+                document.getElementById(id).required = false;
+            }
+        </script>
         <hr />
         <h3>Corrections Made For Tag Out</h3>
         <label for="dateCorrected">Date Corrected:</label>
@@ -85,7 +97,7 @@
         <br />
         <br />
         <label for="correctionImg">Image of Correction Made:</label>
-        <input type="file" name="ImageUpload12" multiple="multiple" id="ImageUpload12-id" accept="image/*" onchange="ZFLive.addMultipleFileUploadFields(this.files,'ImageUpload12','5')">
+        <input type="file" name="imageUpload" multiple="multiple" id="imageUpload" accept="image/*" onchange="ZFLive.addMultipleFileUploadFields(this.files,'ImageUpload12','5')">
         <br />
         <br />
         <label for="sign">Digital Signature</label>
