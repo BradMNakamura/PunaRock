@@ -1,5 +1,5 @@
 ﻿<head>
-    <title>Excavator Pre-Shift Inspection</title>
+    <title>Crusher Pre-Shift Inspection</title>
     <style type="text/css">
         label {
             background-color: pink;
@@ -18,13 +18,14 @@
 </head>
 <body>
     <div class="text-center">
-        <h2>Excavator Pre-Shift Inspection</h2>
+        <h2>Crusher Pre-Shift Inspection</h2>
     </div>
+
     @{
         if (ViewBag.SuccessMessage == null)
         {
-            <div id="SafetyForm">
-                <form id="safetyCheck" method="post" runat="server">
+            <div id="CrusherForm">
+                <form id="crusher" method="post" runat="server">
                     <div class="Element">
                         <label for="date">Date:</label>
                         <input type="date" id="date" name="date" min="2022-01-01" value ='@DateTime.Today.ToString("yyyy-MM-dd")' required>
@@ -32,7 +33,7 @@
                     <div class="Element">
                         <label for="EquipNo">Equipment Number:</label>
                         <select name="EquipNo">
-                            @foreach (var Item in Model.SafetyCheck)
+                            @foreach (var Item in Model.Crusher)
                             {
                                 if (Item.Type == "Equipment")
                                 {
@@ -42,13 +43,13 @@
                         </select>
                     </div>
                     <div class="Element">
-                        <label for="hourmeter">Hour Meter Reading:</label>
+                        <label for="hourmeter">Hour Meter Reading</label>
                         <input type="number" id="hourmeter" name="hourmeter" min="0" placeholder="0" required>
                     </div>
                     @{
                         int q = 1;
                     }
-                    @foreach (var Item in Model.SafetyCheck)
+                    @foreach (var Item in Model.Crusher)
                     {
                         if (Item.Type == "Safety")
                         {
@@ -64,12 +65,58 @@
                                 <label for="caution">Caution</label>
                                 <input type="radio" id="tag-out" name="@Item.Id" value="Tag-Out" onclick="tag_clicked('@element')">
                                 <label for="tag-out">Tag-Out</label>
-                                <div style="padding-top: 5px;">
+                                <div style="padding-bottom: 5px">
                                     <input type="text" id="@element" name="@Item.Id" placeholder="Enter Comment" style="display: none;">
                                 </div>
                             </div>
                         }
                     }
+                    <div class="Element">
+                        <label for="dateCorrected">Date Corrected:</label>
+                        <input type="date" id="date" name="dateCorrected" min="2022-01-01" value ='@DateTime.Today.ToString("yyyy-MM-dd")' required>
+                    </div>
+                    <div class="Element">
+                        <label for="tagOut">Tag Out Corrected By:</label>
+                        <select name="tagOut" required>
+                            <option value="" disabled selected>Select your option</option>
+                            @foreach (var Item in Model.Crusher)
+                            {
+                                if (Item.Type == "Employee")
+                                {
+                                    <option value="@Item.Id">@Item.Data</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="Element">
+                        <label for="correctionDesc">Description of Correction Made:</label>
+                        <input type="text" id="correctionDesc" name="correctionDesc">
+                    </div>
+                    <div class="Element">
+                        <label for="correctionImg">Image of Correction Made:</label>
+                        <input type="file" id="correctionImg" runat="server" name="correctionImg" hidden>
+                    </div>
+                    <div class="Element">
+                        <label for="sign">Digital Signature</label>
+                        <input type="text" id="sign" name="sign">
+                    </div>
+                    <div class="Element">
+                        <label for="operatorName">Operators Name:</label>
+                        <select name="operatorName" required>
+                            <option value="" disabled selected>Select your option</option>
+                            @foreach (var Item in Model.Crusher)
+                            {
+                                if (Item.Type == "Employee")
+                                {
+                                    <option value="@Item.Id">@Item.Data</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="Element">
+                        <label for="dateInspected">Date Inspected:</label>
+                        <input type="date" id="date" name="dateInspected" min="2022-01-01" value ='@DateTime.Today.ToString("yyyy-MM-dd")' required>
+                    </div>
                     <div class="Element">
                         <label for="signature">Digital Signature: </label>
                         <input type="text" id="signature" name="signature" placeholder="Enter Your Name" required>

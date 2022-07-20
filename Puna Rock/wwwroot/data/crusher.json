@@ -1,0 +1,137 @@
+[
+	{
+		"id": "plt-a",
+		"data": "Plt-A",
+		"type": "Equipment"
+	},
+	{
+		"id": "plt-b",
+		"data": "Plt-B",
+		"type": "Equipment"
+	},
+	{
+		"id": "extec screener",
+		"data": "Extec Screener",
+		"type": "Equipment"
+	},
+	{
+		"id": "powergrid screener",
+		"data": "PowerGrid Screener",
+		"type": "Equipment"
+	},
+	{
+		"id": "Horn",
+		"data": "Startup horn on generator",
+		"type": "Safety"
+	},
+	{
+		"id": "Guarding",
+		"data": "Pulleys / Return Roller / V-Belt / Flywheels",
+		"type": "Safety"
+	},
+	{
+		"id": "InsideCab",
+		"data": "Cab Windows / Interior",
+		"type": "Safety"
+	},
+	{
+		"id": "Electrical",
+		"data": "MCC Panel Doors / Wires / Electric Motor J-Box Covers and Bushings",
+		"type": "Safety"
+	},
+	{
+		"id": "Fire",
+		"data": "Fire Extinguisher Expiration Date / Charge / Pin Strap / Securely Mounted",
+		"type": "Safety"
+	},
+	{
+		"id": "Access",
+		"data": "Ladders / Railings / Walkways",
+		"type": "Safety"
+	},
+	{
+		"id": "Berms",
+		"data": "Feeder Ramp Berms / Stockpile Ramp Berms",
+		"type": "Safety"
+	},
+	{
+		"id": "Generator",
+		"data": "Generator Engine Oil Level / V-Belt / Hoses / Radiator",
+		"type": "Safety"
+	},
+	{
+		"id": "Crushers",
+		"data": "Crusher Jaw Grease / Feeder, Cone and Screen Oil",
+		"type": "Safety"
+	},
+	{
+		"id": "Conveyor",
+		"data": "Conveyor Belt / Track / Belt Clips / Idle Rollers / Return Roller",
+		"type": "Safety"
+	},
+	{
+		"id": "Other",
+		"data": "Other Defects",
+		"type": "Safety"
+	},
+	{
+		"id": "Arquitola, James",
+		"data": "Arquitola, James",
+		"type": "Employee"
+	},
+	{
+		"id": "Cambra, Delbert",
+		"data": "Cambra, Delbert",
+		"type": "Employee"
+	},
+	{
+		"id": "Chartrand, Chandler",
+		"data": "Chartrand, Chandler",
+		"type": "Employee"
+	},
+	{
+		"id": "Ganiron, Robert",
+		"data": "Ganiron, Robert",
+		"type": "Employee"
+	},
+	{
+		"id": "Kuwaye, Tyson",
+		"data": "Kuwaye, Tyson",
+		"type": "Employee"
+	},
+	{
+		"id": "Pacheco, Greg",
+		"data": "Pacheco, Greg",
+		"type": "Employee"
+	},
+	{
+		"id": "Pacleb, Arthur",
+		"data": "Pacleb, Arthur",
+		"type": "Employee"
+	},
+	{
+		"id": "Quihano, Charles",
+		"data": "Quihano, Charles",
+		"type": "Employee"
+	},
+	{
+		"id": "Sumi, Izaak",
+		"data": "Sumi, Izaak",
+		"type": "Employee"
+	},
+	{
+		"id": "Sumi, Iz Boy",
+		"data": "Sumi, Iz Boy",
+		"type": "Employee"
+	},
+	{
+		"id": "Torngren, Travis",
+		"data": "Torngren, Travis",
+		"type": "Employee"
+	},
+	{
+		"id": "Wentz, Dominic",
+		"data": "Wentz, Dominic",
+		"type": "Employee"
+	}
+]
