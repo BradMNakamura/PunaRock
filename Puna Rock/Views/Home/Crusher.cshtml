@@ -1,0 +1,93 @@
+﻿@*
+*@
+@{
+}
+<div class="text-center">
+    <h2>Crusher Pre-Shift Inspection</h2>
+</div>
+
+@{
+    if (ViewBag.SuccessMessage == null)
+    {
+        <div id="CrusherForm">
+            <form id = "crusher" method="post" runat="server">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" min="2022-01-01" required>
+            <br/>
+            <br/>
+            <label for="EquipNo">Equipment Number:</label>
+            <select name="EquipNo">
+            @foreach(var Item in Model.Crusher)
+            {
+                if(Item.Type == "Equipment")
+                {
+                    <option value = "@Item.Id">@Item.Data</option>
+                }
+            }
+            </select>
+            <br/>
+            <br/>
+            <label for="hourmeter">Hour Meter Reading</label>
+            <input type="number" id="hourmeter" name="hourmeter" min="0" placeholder="0" required>
+            <br/>
+            <br/>
+            @{int q = 1;}
+            @foreach(var Item in Model.Crusher)
+            {
+                if(Item.Type == "Safety")
+                {
+                    string element = "question " + q;
+                    q++;
+                    <p><b>@Item.Data</b><br/>
+                    <input type = "radio" id="good" name = "@Item.Id" value="Good" onclick="change('@element')" required>
+                    <label for="good">Good</label>
+                    <input type = "radio" id="caution" name = "@Item.Id" value="Caution" onclick="tag_clicked('@element')">
+                    <label for="caution">Caution</label>
+                    <input type = "radio" id="tag-out" name = "@Item.Id" value="Tag-Out" onclick="tag_clicked('@element')">
+                    <label for="tag-out">Tag-Out</label><br/>
+                    <input type ="text" id="@element" name="@Item.Id" placeholder="Enter Comment" style="display: none;">
+                    </p>
+                }
+            }
+            <label for="signature">Digital Signature: </label>
+            <input type="text" id="signature" name="signature" placeholder="Enter Your Name" required>
+            <br/>
+            <script>
+                function tag_clicked(id) {
+                    document.getElementById(id).style.display = "inline";
+                    document.getElementById(id).required = true;
+                }
+            </script>
+            <script>
+                function change(id){
+                    document.getElementById(id).style.display = "none";
+                    document.getElementById(id).required = false;
+                }
+            </script>
+            <input type="submit" id ="submit" name="submit" value="Submit"/>
+            </form>
+        </div>
+    }
+    else
+    {
+    <div>
+        <br/>
+        <h4 style="text-align:center">Your responses have been recorded<br/>
+        You will be redirected to the <a href="/Home">Home Page<a/> in <span id="counter">7</span> second(s)...
+        </h4>
+        <script>
+            function countdown(){
+                var i =document.getElementById('counter');
+                if(parseInt(i.innerHTML)<=0){
+                    location.href ='/Home';
+                }
+                else{
+                    i.innerHTML = parseInt(i.innerHTML)-1;
+                }
+            }
+            setInterval(function(){countdown()},1000);
+            countdown();
+        </script>
+    </div>
+    }
+}
