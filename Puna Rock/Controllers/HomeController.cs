@@ -17,6 +17,7 @@ namespace Puna_Rock.Controllers
         private string spreadsheetId = "19ZzHAu0oKC68hdrAc2uDYlj4MH4HRZSdIaPnblsXg70";
         private string SafetySheet = "SafetyCheck";
         private string ScaleSheet = "ScaleTickets";
+        private string LoaderSheet = "LoaderReplacements";
         //private string spreadsheetId = "1s7asiUgljjTxqMfFQGHAKKOl3oBDGpL6SggzBnen-gM";
         private string worksheetName = "Sheet1";
 
@@ -132,6 +133,34 @@ namespace Puna_Rock.Controllers
             dynamic model = new ExpandoObject();
             model.LoaderReplacements = LoaderReplacements;
             return View(model);
+        }
+        [HttpPost]
+        public IActionResult LoaderReplacements(IFormCollection form)
+        {
+            GoogleSheets sheet = new GoogleSheets();
+            IList<IList<object>> sheetsValues = new List<IList<object>>();  
+            foreach(var item in form)
+            {
+                if(item.Key.ToString()!="submit" && item.Key.ToString()!="__RequestVerificationToken")
+                {
+                    sheetsValues.Add(new List<object>());
+                    sheetsValues[0].Add(item.Value[0].ToString());
+                    sheetsValues.Add(new List<object>());
+                    if(item.Value.Count > 1 && item.Value[0] != "Good")
+                    {
+                        sheetsValues[0].Add(item.Value[1].ToString());
+                    }
+                    else if (item.Key.ToString()!="date" && item.Key.ToString()!="equipNo" && item.Key.ToString()!="hourMeter" &&
+                        item.Key.ToString()!="dateCorrected" && item.Key.ToString()!="tagOut" && item.Key.ToString()!="correctionDesc" &&
+                        item.Key.ToString() != "correctionImg" && item.Key.ToString() != "sign" && item.Key.ToString() != "operatorName" &&
+                        item.Key.ToString() != "dateInspected" && item.Key.ToString() != "digitalSignature")
+                    {
+                        sheetsValues[0].Add("");
+                    }
+                }
+            }
+            sheet.Append(spreadsheetId, LoaderSheet, sheetsValues);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Placeholder()

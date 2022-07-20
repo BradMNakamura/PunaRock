@@ -27,9 +27,7 @@
         <br />
         <br />
         <label for="hourMeter">Hour Meter Reading:</label>
-        <input type="number" id="hourMeter" min="0" placeholder="0" required>
-        <br />
-        <br />
+        <input type="number" id="hourMeter" name="hourMeter" min="0" placeholder="0" required>
         <hr />
         <h3>Safety & Maintenance Items</h3>
         @{
@@ -97,7 +95,7 @@
         <br />
         <br />
         <label for="correctionImg">Image of Correction Made:</label>
-        <input type="file" name="imageUpload" multiple="multiple" id="imageUpload" accept="image/*" onchange="ZFLive.addMultipleFileUploadFields(this.files,'ImageUpload12','5')">
+        <input type="file" name="correctionImg" multiple="multiple" id="correctionImg" accept="image/*" onchange="ZFLive.addMultipleFileUploadFields(this.files,'correctionImg','5')">
         <br />
         <br />
         <label for="sign">Digital Signature</label>
@@ -117,10 +115,15 @@
         <br />
         <br />
         <label for="dateInspected">Date Inspected:</label>
-        <input type="date" id="date" name="dateInspected" required>
+        <input type="date" id="dateInspected" name="dateInspected" required>
         <br />
         <br />
         <label for="digitalSignature">Digital Signature</label>
         <input type="text" id="digitalSignature" name="digitalSignature">
+        <br />
+        <br />
+        <div style="display:flex; align-items:center; justify-content: center">
+                <input type="submit" id = "submit" name="submit" value="Submit"/>
+        </div>
     </form>
 </div>
