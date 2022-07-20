@@ -49,6 +49,58 @@
                     </p>
                 }
             }
+            <label for="dateCorrected">Date Corrected:</label>
+            <input type="date" id="date" name="dateCorrected" min="2022-01-01" required>
+            <br />
+            <br />
+            <label for="tagOut">Tag Out Corrected By:</label>
+            <select name="tagOut" required>
+                <option value="" disabled selected>Select your option</option>
+                @foreach(var Item in Model.Crusher)
+                {
+                    if(Item.Type == "Employee")
+                    {
+                        <option value = "@Item.Id">@Item.Data</option>
+                    }
+                }
+            </select>
+            <br />
+            <br />
+            <label for="correctionDesc">Description of Correction Made:</label>
+            <input type="text" id="correctionDesc" name="correctionDesc">
+            <br />
+            <br />
+            <label for="correctionImg">Image of Correction Made:</label>
+            @*
+            <input type ="file" id="ofile" runat="server name="ofile">
+            <asp:button id="btnUpload" type="submit" text="Upload" runat="server"></asp:button>
+            <asp:Panel ID="frmConfirmation" Visible="False" Runat="server">
+            <asp:Label id="lblUploadResult" Runat="server"></asp:Label>
+            </asp:Panel>
+            *@
+            <br />
+            <br />
+            <label for="sign">Digital Signature</label>
+            <input type="text" id="sign" name="sign">
+            <br />
+            <br />
+            <label for="operatorName">Operators Name:</label>
+            <select name="operatorName" required>
+                <option value="" disabled selected>Select your option</option>
+                @foreach(var Item in Model.Crusher)
+                {
+                    if(Item.Type == "Employee")
+                    {
+                        <option value = "@Item.Id">@Item.Data</option>
+                    }
+                }
+            </select>
+            <br />
+            <br />
+            <label for="dateInspected">Date Inspected:</label>
+            <input type="date" id="date" name="dateInspected" min="2022-01-01" required>
+            <br />
+            <br />
             <label for="signature">Digital Signature: </label>
             <input type="text" id="signature" name="signature" placeholder="Enter Your Name" required>
             <br/>

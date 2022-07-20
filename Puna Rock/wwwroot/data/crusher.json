@@ -73,5 +73,65 @@
 		"id": "Other",
 		"data": "Other Defects",
 		"type": "Safety"
+	},
+	{
+		"id": "Arquitola, James",
+		"data": "Arquitola, James",
+		"type": "Employee"
+	},
+	{
+		"id": "Cambra, Delbert",
+		"data": "Cambra, Delbert",
+		"type": "Employee"
+	},
+	{
+		"id": "Chartrand, Chandler",
+		"data": "Chartrand, Chandler",
+		"type": "Employee"
+	},
+	{
+		"id": "Ganiron, Robert",
+		"data": "Ganiron, Robert",
+		"type": "Employee"
+	},
+	{
+		"id": "Kuwaye, Tyson",
+		"data": "Kuwaye, Tyson",
+		"type": "Employee"
+	},
+	{
+		"id": "Pacheco, Greg",
+		"data": "Pacheco, Greg",
+		"type": "Employee"
+	},
+	{
+		"id": "Pacleb, Arthur",
+		"data": "Pacleb, Arthur",
+		"type": "Employee"
+	},
+	{
+		"id": "Quihano, Charles",
+		"data": "Quihano, Charles",
+		"type": "Employee"
+	},
+	{
+		"id": "Sumi, Izaak",
+		"data": "Sumi, Izaak",
+		"type": "Employee"
+	},
+	{
+		"id": "Sumi, Iz Boy",
+		"data": "Sumi, Iz Boy",
+		"type": "Employee"
+	},
+	{
+		"id": "Torngren, Travis",
+		"data": "Torngren, Travis",
+		"type": "Employee"
+	},
+	{
+		"id": "Wentz, Dominic",
+		"data": "Wentz, Dominic",
+		"type": "Employee"
 	}
 ]
