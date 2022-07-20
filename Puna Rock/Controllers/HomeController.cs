@@ -125,7 +125,8 @@ namespace Puna_Rock.Controllers
                 }
             }
             sheet.Append(spreadsheetId, ScaleSheet, sheetsValues);
-            return RedirectToAction("Index");
+            ViewBag.SuccessMessage = "Success";
+            return View();
         }
 
         public IActionResult TimeSheet()
