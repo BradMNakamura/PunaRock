@@ -28,7 +28,7 @@
                 <form id="crusher" method="post" runat="server">
                     <div class="Element">
                         <label for="date">Date:</label>
-                        <input type="date" id="date" name="date" min="2022-01-01" required>
+                        <input type="date" id="date" name="date" min="2022-01-01" value ='@DateTime.Today.ToString("yyyy-MM-dd")' required>
                     </div>
                     <div class="Element">
                         <label for="EquipNo">Equipment Number:</label>
@@ -73,7 +73,7 @@
                     }
                     <div class="Element">
                         <label for="dateCorrected">Date Corrected:</label>
-                        <input type="date" id="date" name="dateCorrected" min="2022-01-01" required>
+                        <input type="date" id="date" name="dateCorrected" min="2022-01-01" value ='@DateTime.Today.ToString("yyyy-MM-dd")' required>
                     </div>
                     <div class="Element">
                         <label for="tagOut">Tag Out Corrected By:</label>
@@ -115,7 +115,7 @@
                     </div>
                     <div class="Element">
                         <label for="dateInspected">Date Inspected:</label>
-                        <input type="date" id="date" name="dateInspected" min="2022-01-01" required>
+                        <input type="date" id="date" name="dateInspected" min="2022-01-01" value ='@DateTime.Today.ToString("yyyy-MM-dd")' required>
                     </div>
                     <div class="Element">
                         <label for="signature">Digital Signature: </label>
