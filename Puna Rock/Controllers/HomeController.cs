@@ -152,8 +152,8 @@ namespace Puna_Rock.Controllers
                     }
                     else if (item.Key.ToString()!="date" && item.Key.ToString()!="equipNo" && item.Key.ToString()!="hourMeter" &&
                         item.Key.ToString()!="dateCorrected" && item.Key.ToString()!="tagOut" && item.Key.ToString()!="correctionDesc" &&
-                        item.Key.ToString() != "correctionImg" && item.Key.ToString() != "sign" && item.Key.ToString() != "operatorName" &&
-                        item.Key.ToString() != "dateInspected" && item.Key.ToString() != "digitalSignature")
+                        item.Key.ToString() != "sign" && item.Key.ToString() != "operatorName" && item.Key.ToString() != "dateInspected" && 
+                        item.Key.ToString() != "digitalSignature")
                     {
                         sheetsValues[0].Add("");
                     }
