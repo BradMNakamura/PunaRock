@@ -17,6 +17,7 @@ namespace Puna_Rock.Controllers
         private string spreadsheetId = "19ZzHAu0oKC68hdrAc2uDYlj4MH4HRZSdIaPnblsXg70";
         private string SafetySheet = "SafetyCheck";
         private string ScaleSheet = "ScaleTickets";
+        private string CrusherSheet = "Crusher";
         private string LoaderSheet = "LoaderReplacements";
         //private string spreadsheetId = "1s7asiUgljjTxqMfFQGHAKKOl3oBDGpL6SggzBnen-gM";
         private string worksheetName = "Sheet1";
@@ -29,13 +30,18 @@ namespace Puna_Rock.Controllers
 
         public JsonFileScaleTicketsService ScaleTicketsService;
 
+        public JsonFileCrusherService CrusherService;
+
+
         public JsonFileLoaderReplacementsService LoaderReplacementsService;
         public HomeController(ILogger<HomeController> logger, JsonFileSafetyCheckService safetyCheckService,
-            JsonFileScaleTicketsService scaleTicketsService, JsonFileLoaderReplacementsService loaderReplacementsService)
+            JsonFileScaleTicketsService scaleTicketsService, JsonFileCrusherService crusherService, 
+            JsonFileLoaderReplacementsService loaderReplacementsService)
         {
             _logger = logger;
             SafetyCheckService = safetyCheckService;
             ScaleTicketsService = scaleTicketsService;
+            CrusherService = crusherService;
             LoaderReplacementsService = loaderReplacementsService;
 
         } 
@@ -58,6 +64,32 @@ namespace Puna_Rock.Controllers
                 Console.WriteLine(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             }
             return View(model);
+        }
+        [HttpPost]
+        public IActionResult SafetyCheck(IFormCollection form)
+        {
+            GoogleSheets sheet = new GoogleSheets();
+            IList<IList<object>> sheetsValues = new List<IList<object>>();
+            foreach (var item in form)
+            {
+                if (item.Key.ToString() != "submit" && item.Key.ToString() != "__RequestVerificationToken")
+                {
+                    sheetsValues.Add(new List<object>());
+                    sheetsValues[0].Add(item.Value[0].ToString());
+                    sheetsValues.Add(new List<object>());
+                    if (item.Value.Count > 1 && item.Value[0] != "Good")
+                    {
+                        sheetsValues[0].Add(item.Value[1].ToString());
+                    }
+                    else if (item.Key.ToString() != "date" && item.Key.ToString() != "EquipNo" && item.Key.ToString() != "hourmeter")
+                    {
+                        sheetsValues[0].Add("");
+                    }
+                }
+            }
+            sheet.Append(spreadsheetId, SafetySheet, sheetsValues);
+            ViewBag.SuccessMessage = "Success";
+            return View();
         }
         public IActionResult ScaleTickets()
         {
@@ -99,33 +131,37 @@ namespace Puna_Rock.Controllers
                 }
             }
             sheet.Append(spreadsheetId, ScaleSheet, sheetsValues);
-            return RedirectToAction("Index");
+            ViewBag.SuccessMessage = "Success";
+            return View();
+        }
+
+        public IActionResult TimeSheet()
+        {
+            return View();
         }
         [HttpPost]
-        public IActionResult SafetyCheck(IFormCollection form)
+        public IActionResult TimeSheet(IFormCollection form)
         {
             GoogleSheets sheet = new GoogleSheets();
             IList<IList<object>> sheetsValues = new List<IList<object>>();
             foreach (var item in form)
-            {
-                if (item.Key.ToString()!="submit" && item.Key.ToString() != "__RequestVerificationToken")
+            {   
+                // Just to see the pushed info
+                Console.WriteLine(item);
+                if (item.Key.ToString() != "submit" && item.Key.ToString() != "__RequestVerificationToken")
                 {
-                    sheetsValues.Add(new List<object>());
-                    sheetsValues[0].Add(item.Value[0].ToString());
-                    sheetsValues.Add(new List<object>());
-                    if (item.Value.Count > 1 && item.Value[0] != "Good")
+                    foreach (var temp in item.Value)
                     {
-                        sheetsValues[0].Add(item.Value[1].ToString());
-                    }
-                    else if(item.Key.ToString()!="date" && item.Key.ToString()!="EquipNo" && item.Key.ToString() != "hourmeter")
-                    {
-                        sheetsValues[0].Add("");
+                        if (temp != "")
+                        {
+                            sheetsValues.Add(new List<object>());
+                            sheetsValues[0].Add(item.Value[0].ToString());
+                        }
                     }
                 }
             }
-            sheet.Append(spreadsheetId, SafetySheet, sheetsValues);
-            ViewBag.SuccessMessage = "Success";
-            return View();
+            sheet.Append(spreadsheetId, worksheetName, sheetsValues);
+            return RedirectToAction("Index");
         }
         public IActionResult LoaderReplacements()
         {
@@ -163,38 +199,44 @@ namespace Puna_Rock.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Placeholder()
+        public IActionResult Crusher()
         {
-            return View();
+            var Crusher = CrusherService.GetData();
+            dynamic model = new ExpandoObject();
+            model.Crusher = Crusher;
+            return View(model);
         }
 
-        public IActionResult TimeSheet()
-        {
-            return View();
-        }
         [HttpPost]
-        public IActionResult TimeSheet(IFormCollection form)
+        public IActionResult Crusher(IFormCollection form)
         {
             GoogleSheets sheet = new GoogleSheets();
             IList<IList<object>> sheetsValues = new List<IList<object>>();
             foreach (var item in form)
-            {   
-                // Just to see the pushed info
-                Console.WriteLine(item);
+            {
                 if (item.Key.ToString() != "submit" && item.Key.ToString() != "__RequestVerificationToken")
                 {
-                    foreach (var temp in item.Value)
+                    sheetsValues.Add(new List<object>());
+                    sheetsValues[0].Add(item.Value[0].ToString());
+                    sheetsValues.Add(new List<object>());
+                    if (item.Value.Count > 1 && item.Value[0] != "Good")
                     {
-                        if (temp != "")
-                        {
-                            sheetsValues.Add(new List<object>());
-                            sheetsValues[0].Add(item.Value[0].ToString());
-                        }
+                        sheetsValues[0].Add(item.Value[1].ToString());
+                    }
+                    else if (item.Key.ToString() != "date" && item.Key.ToString() != "EquipNo" && item.Key.ToString() != "hourmeter")
+                    {
+                        sheetsValues[0].Add("");
                     }
                 }
             }
-            sheet.Append(spreadsheetId, worksheetName, sheetsValues);
-            return RedirectToAction("Index");
+            sheet.Append(spreadsheetId, CrusherSheet, sheetsValues);
+            ViewBag.SuccessMessage = "Success";
+            return View();
+        }
+
+        public IActionResult Placeholder()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

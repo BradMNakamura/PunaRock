@@ -1,0 +1,23 @@
+﻿<script>
+    function tag_clicked(id) {
+        document.getElementById(id).style.display = "inline";
+        document.getElementById(id).required = true;
+    }
+</script>
+<script>
+    function change(id) {
+        document.getElementById(id).style.display = "none";
+        document.getElementById(id).required = false;
+    }
+</script>
+<script>
+    function countdown() {
+        var i = document.getElementById('counter');
+        if (parseInt(i.innerHTML) <= 0) {
+            location.href = '/Home';
+        }
+        else {
+            i.innerHTML = parseInt(i.innerHTML) - 1;
+        }
+    }
+</script>
