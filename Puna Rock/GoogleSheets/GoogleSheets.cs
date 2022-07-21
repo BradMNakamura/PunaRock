@@ -80,5 +80,34 @@ namespace SheetsQuickstart
         }
 
 
+
+        //Need to be able to create, update, and delete to be able to query. Create a new spreadsheet, update first cell with the query, read whole sheet, then delete sheet.
+
+
+
+        public string Query(string spreadsheetId, string worksheetName)
+        {
+            string range = $"{worksheetName}!B7:F35";
+            SpreadsheetsResource.ValuesResource.GetRequest.ValueRenderOptionEnum valueRenderOption = (SpreadsheetsResource.ValuesResource.GetRequest.ValueRenderOptionEnum)0;  // TODO: Update placeholder value.
+
+            // How dates, times, and durations should be represented in the output.
+            // This is ignored if value_render_option is
+            // FORMATTED_VALUE.
+            // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+            SpreadsheetsResource.ValuesResource.GetRequest.DateTimeRenderOptionEnum dateTimeRenderOption = (SpreadsheetsResource.ValuesResource.GetRequest.DateTimeRenderOptionEnum)0;  // TODO: Update placeholder value.
+
+            SpreadsheetsResource.ValuesResource.GetRequest request = service.Spreadsheets.Values.Get(spreadsheetId, range);
+            request.ValueRenderOption = valueRenderOption;
+            request.DateTimeRenderOption = dateTimeRenderOption;
+
+            // To execute asynchronously in an async method, replace `request.Execute()` as shown:
+            ValueRange response = request.Execute();
+            // Data.ValueRange response = await request.ExecuteAsync();
+
+            // TODO: Change code below to process the `response` object:
+            Console.WriteLine(JsonConvert.SerializeObject(response));
+            return JsonConvert.SerializeObject(response);
+        }
+
     }
 }

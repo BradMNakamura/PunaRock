@@ -159,6 +159,8 @@ namespace Puna_Rock.Controllers
 
         public IActionResult Crusher()
         {
+            GoogleSheets test = new GoogleSheets();
+            test.Query(spreadsheetId,"Queries");
             var Crusher = CrusherService.GetData();
             dynamic model = new ExpandoObject();
             model.Crusher = Crusher;
