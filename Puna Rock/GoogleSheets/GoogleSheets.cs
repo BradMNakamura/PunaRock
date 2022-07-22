@@ -8,6 +8,8 @@ using System.IO;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using Newtonsoft.Json;
+using System.Collections;
+using static Google.Apis.Sheets.v4.SpreadsheetsResource;
 
 namespace SheetsQuickstart
 {
@@ -87,22 +89,38 @@ namespace SheetsQuickstart
 
         public string Query(string spreadsheetId, string worksheetName)
         {
-            string range = $"{worksheetName}!B7:F35";
-            SpreadsheetsResource.ValuesResource.GetRequest.ValueRenderOptionEnum valueRenderOption = (SpreadsheetsResource.ValuesResource.GetRequest.ValueRenderOptionEnum)0;  // TODO: Update placeholder value.
-
+            //string range = $"{worksheetName}!B7:F35";
+            //SpreadsheetsResource.ValuesResource.GetRequest.ValueRenderOptionEnum valueRenderOption = (SpreadsheetsResource.ValuesResource.GetRequest.ValueRenderOptionEnum)0;  // TODO: Update placeholder value.
             // How dates, times, and durations should be represented in the output.
             // This is ignored if value_render_option is
             // FORMATTED_VALUE.
             // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
-            SpreadsheetsResource.ValuesResource.GetRequest.DateTimeRenderOptionEnum dateTimeRenderOption = (SpreadsheetsResource.ValuesResource.GetRequest.DateTimeRenderOptionEnum)0;  // TODO: Update placeholder value.
+            //SpreadsheetsResource.ValuesResource.GetRequest.DateTimeRenderOptionEnum dateTimeRenderOption = (SpreadsheetsResource.ValuesResource.GetRequest.DateTimeRenderOptionEnum)0;  // TODO: Update placeholder value.
 
-            SpreadsheetsResource.ValuesResource.GetRequest request = service.Spreadsheets.Values.Get(spreadsheetId, range);
-            request.ValueRenderOption = valueRenderOption;
-            request.DateTimeRenderOption = dateTimeRenderOption;
+ 
+            List<Request> requests = new List<Request>();
+            BatchUpdateSpreadsheetRequest requestBody = new BatchUpdateSpreadsheetRequest()
+            {
+                IncludeSpreadsheetInResponse = true,
+            };
+            requestBody.Requests = requests;
 
-            // To execute asynchronously in an async method, replace `request.Execute()` as shown:
-            ValueRange response = request.Execute();
-            // Data.ValueRange response = await request.ExecuteAsync();
+            SpreadsheetsResource.BatchUpdateRequest request = service.Spreadsheets.BatchUpdate(requestBody,spreadsheetId);
+
+            Request find = new Request()
+            {
+                FindReplace = new FindReplaceRequest()
+                {
+                    Find = "This One",
+                    Replacement = "FOUND",
+                    SheetId = 1736661113
+                }
+            };
+            FindReplaceRequest test = new FindReplaceRequest();
+            requests.Add(find);
+
+
+            var response = request.Execute();
 
             // TODO: Change code below to process the `response` object:
             Console.WriteLine(JsonConvert.SerializeObject(response));
