@@ -22,6 +22,7 @@
         }
     </style>
 </head>
+
 <body>
     <div style="padding-bottom:20px" class="text-center">
         <h2>Loader/Forklift Replacements</h2>
@@ -29,130 +30,142 @@
     @{
         if(ViewBag.SucessMessage == null)
         {
-                <form id="loaderReplacements" method="post" runat="server">
-                    <div style=padding: 15px; min-width:100px; display: inline-block>
-                        <div class="Element">
-                            <label class="required" for="date">Date</label>
-                            <input type="date" id="date" name="date" required>
-                        </div>  
-                        <div class="Element">
-                            <label class="required" for="equipNo">Equipment Number</label>
-                            <select name="equipNo" required>
-                                <option value="" disabled selected>Select your option</option>
-                                @foreach(var Item in Model.LoaderReplacements)
+            <form action="LoaderReplacements" id="loaderReplacements" method="post" runat="server">
+                <div style=padding: 15px; min-width:100px; display: inline-block>
+                    <div class="Element">
+                        <label class="required" for="date">Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>  
+                    <div class="Element">
+                        <label class="required" for="equipNo">Equipment Number</label>
+                        <select name="equipNo" required>
+                            <option value="" disabled selected>Select your option</option>
+                            @foreach(var Item in Model.LoaderReplacements)
                             {
                                 if(Item.Type == "Equipment")
                                 {
-                                        <option value = "@Item.Data">@Item.Id</option>
+                                    <option value = "@Item.Data">@Item.Id</option>
                                 }
                             }
-                            </select>
-                        </div>
-                        <div class="Element">
-                            <label class="required" for="hourMeter">Hour Meter Reading</label>
-                            <input type="number" id="hourMeter" name="hourMeter" min="0" placeholder="0" required>
-                        </div>
-                        <hr>
-                        <h3>Safety & Maintenance Items</h3>                           
-                        @{
-                            int q = 1;
-                            foreach(var Item in Model.LoaderReplacements)
-                            {
-                                string element = "question " + q;
-                                q++;           
-                                if(Item.Type == "Safety")
-                                {       
-                                    <div class="required">
-                                        <b>@Item.Data</b>
-                                    </div>
-                                    <div class="Element">
-                                        @if(Item.Id == "ANY OTHER DEFECTS")
-                                        {                       
-                                            <input type = "radio" id="none" name = "@Item.Id" value="None" onclick="change('@element')" required>
-                                            <label for="none">None</label>
-                                        }
-                                        else
-                                        {
-                                            <input type = "radio" id="good" name = "@Item.Id" value="Good" onclick="change('@element')" required>
-                                            <label for="good">Good</label>
-                                        }                                 
-                                        <input type = "radio" id="caution" name = "@Item.Id" value="Caution" onclick="tag_clicked('@element')">
-                                        <label for="caution">Caution</label>
-                                        <input type = "radio" id="tag-out" name = "@Item.Id" value="Tag-Out" onclick="tag_clicked('@element')">
-                                        <label for="tag-out">Tag-Out</label><br/>
-                                        <div style="padding-top: 5px;">
-                                            <input type="text" id="@element" name="@Item.Id" placeholder="Enter Comment" style="display: none;">
-                                        </div>                                                                     
-                                    </div> 
-                                }          
-                            }
+                        </select>
+                    </div>
+                    <div class="Element">
+                        <label class="required" for="hourMeter">Hour Meter Reading</label>
+                        <input type="number" id="hourMeter" name="hourMeter" min="0" placeholder="0" required>
+                    </div>
+                    <hr>
+                    <h3>Safety & Maintenance Items</h3>                           
+                    @{
+                        int q = 1;
+                        foreach(var Item in Model.LoaderReplacements)
+                        {
+                            string element = "question " + q;
+                            q++;           
+                            if(Item.Type == "Safety")
+                            {       
+                                <div class="required">
+                                    <b>@Item.Data</b>
+                                </div>
+                                <div class="Element">
+                                    @if(Item.Id == "ANY OTHER DEFECTS")
+                                    {                       
+                                        <input type = "radio" id="none" name = "@Item.Id" value="None" onclick="change('@element')" required>
+                                        <label for="none">None</label>
+                                    }
+                                    else
+                                    {
+                                        <input type = "radio" id="good" name = "@Item.Id" value="Good" onclick="change('@element')" required>
+                                        <label for="good">Good</label>
+                                    }                                 
+                                    <input type = "radio" id="caution" name = "@Item.Id" value="Caution" onclick="tag_clicked('@element')">
+                                    <label for="caution">Caution</label>
+                                    <input type = "radio" id="tag-out" name = "@Item.Id" value="Tag-Out" onclick="tag_clicked('@element')">
+                                    <label for="tag-out">Tag-Out</label><br/>
+                                    <div style="padding-top: 5px;">
+                                        <input type="text" id="@element" name="@Item.Id" placeholder="Enter Comment" style="display: none;">
+                                    </div>                                                                     
+                                </div> 
+                            }          
                         }
-                        <hr>
-                        <h3>Corrections Made For Tag Out</h3>
-                        <div class="Element">
-                            <label for="dateCorrected">Date Corrected</label>
-                            <input type="date" id="dateCorrected" name="dateCorrected">
-                        </div>
-                        <div class="Element">
-                            <label for="tagOut">Tag Out Corrected By</label>
-                            <select name="tagOut">
-                                <option value="" disabled selected>Select your option</option>
-                                @foreach(var Item in Model.LoaderReplacements)
-                                {
-                                    if(Item.Type == "Employee")
-                                    {
-                                        <option value = "@Item.Id">@Item.Data</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-                        <div class="Element">
-                            <label for="correctionDesc">Description of Correction Made</label>
-                            <input type="text" id="correctionDesc" name="correctionDesc">
-                        </div>
-                        <div class="Element">
-                            <label for="sign">Digital Signature</label>
-                            <input type="text" id="sign" name="sign">
-                        </div>
-                        <hr>
-                        <div class="Element">
-                            <label class="required" for="operatorName">Operators Name</label>
-                            <select name="operatorName" required>
-                                <option value="" disabled selected>Select your option</option>
-                                @foreach(var Item in Model.LoaderReplacements)
-                                {
-                                    if(Item.Type == "Employee")
-                                    {
-                                        <option value = "@Item.Id">@Item.Data</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-                        <div class="Element">
-                            <label class="required" for="dateInspected">Date Inspected</label>
-                            <input type="date" id="dateInspected" name="dateInspected" required>
-                        </div>
-                        <div class="Element">
-                            <label class="required" for="digitalSignature">Digital Signature</label>
-                            <input type="text" id="digitalSignature" name="digitalSignature">
-                        </div>
-                        <div style="display:flex; align-items:center; justify-content: center">
-                            <input type="submit" id="submit" name="submit" value="Submit" />
-                        </div>
-                    </div> 
-                </form>
-                <script>
-                    function tag_clicked(id) {
-                        document.getElementById(id).style.display = "inline";
-                        document.getElementById(id).required = true;
                     }
-                </script>
-                <script>
-                    function change(id){
-                        document.getElementById(id).style.display = "none";
-                        document.getElementById(id).required = false;
-                    }
-                </script>
+                    <hr>
+                    <h3>Corrections Made For Tag Out</h3>
+                    <div class="Element">
+                        <label for="dateCorrected">Date Corrected</label>
+                        <input type="date" id="dateCorrected" name="dateCorrected">
+                    </div>
+                    <div class="Element">
+                        <label for="tagOut">Tag Out Corrected By</label>
+                        <select name="tagOut">
+                            <option value="" disabled selected>Select your option</option>
+                            @foreach(var Item in Model.LoaderReplacements)
+                            {
+                                if(Item.Type == "Employee")
+                                {
+                                        <option value = "@Item.Id">@Item.Data</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="Element">
+                        <label for="correctionDesc">Description of Correction Made</label>
+                        <input type="text" id="correctionDesc" name="correctionDesc">
+                    </div>
+                    <div class="Element">
+                        <label for="sign">Digital Signature</label>
+                        <input type="text" id="sign" name="sign">
+                    </div>
+                    <hr>
+                    <div class="Element">
+                        <label class="required" for="operatorName">Operators Name</label>
+                        <select name="operatorName" required>
+                            <option value="" disabled selected>Select your option</option>
+                            @foreach(var Item in Model.LoaderReplacements)
+                            {
+                                if(Item.Type == "Employee")
+                                {
+                                    <option value = "@Item.Id">@Item.Data</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="Element">
+                        <label class="required" for="dateInspected">Date Inspected</label>
+                        <input type="date" id="dateInspected" name="dateInspected" required>
+                    </div>
+                    <div class="Element">
+                        <label class="required" for="digitalSignature">Digital Signature</label>
+                        <input type="text" id="digitalSignature" name="digitalSignature">
+                    </div>
+                    <div style="display:flex; align-items:center; justify-content: center">
+                        <input type="submit" id="submit" name="submit" value="Submit" />
+                    </div>
+                    <hr>
+                </div>                                                                                                                                  
+            </form>
+            <script>
+                function tag_clicked(id) {
+                document.getElementById(id).style.display = "inline";
+                document.getElementById(id).required = true;
+                }
+            </script>
+            <script>
+                function change(id){
+                document.getElementById(id).style.display = "none";
+                document.getElementById(id).required = false;
+                }
+            </script>
+
+            <div style="padding-bottom:20px" class="text-center">
+                <h2>Retrieve Previous Forms</h2>
+            </div>
+            <form action="RetrieveForm" method="post">
+                <div style=padding: 15px; min-width:100px; display: inline-block>
+                    <label class="Element" for="retrieveForm">Retrieve Form</label>
+                    <input type="number" id="uniqueId" step="1" min="1" name="uniqueId">
+                    <input type="submit" id="submit" name="submit" value="Retrieve Form" />
+                </div>   
+            </form>               
         }
     }
 </body>

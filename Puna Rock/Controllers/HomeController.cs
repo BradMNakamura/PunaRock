@@ -233,6 +233,14 @@ namespace Puna_Rock.Controllers
             ViewBag.SuccessMessage = "Success";
             return View();
         }
+        public ActionResult RetrieveForm(IFormCollection form)
+        {
+            GoogleSheets sheet = new GoogleSheets();
+            var uniqueId = Int32.Parse(form["uniqueId"]);
+            ViewBag.Data = sheet.getForm(spreadsheetId, LoaderSheet, uniqueId); // TEST
+            ViewBag.SuccessMessage = "Success";           
+            return View("LoaderReplacements");
+        }
 
         public IActionResult Placeholder()
         {
