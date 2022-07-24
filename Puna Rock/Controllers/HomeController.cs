@@ -47,8 +47,12 @@ namespace Puna_Rock.Controllers
         {
             return View();
         }
-        public IActionResult SafetyCheck()
+        public IActionResult SafetyCheck(string formId)
         {
+            if (formId != null)
+            {
+                ViewBag.Query = formId;
+            }
             var SafetyCheck = SafetyCheckService.GetData();
             dynamic model = new ExpandoObject();
             model.SafetyCheck = SafetyCheck;
@@ -61,9 +65,15 @@ namespace Puna_Rock.Controllers
         }
         [HttpPost]
         public IActionResult SafetyCheck(IFormCollection form)
-        {
+        {            
+            //check for form query
+            if (form.TryGetValue("query", out var formId))
+            {
+                Response.Redirect(nameof(HomeController.SafetyCheck) +"?formId=" + formId);
+            }
             GoogleSheets sheet = new GoogleSheets();
             IList<IList<object>> sheetsValues = new List<IList<object>>();
+
             foreach (var item in form)
             {
                 if (item.Key.ToString() != "submit" && item.Key.ToString() != "__RequestVerificationToken")

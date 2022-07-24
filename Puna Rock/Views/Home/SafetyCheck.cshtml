@@ -21,8 +21,20 @@
         <h2>Excavator Pre-Shift Inspection</h2>
     </div>
     @{
-        if (ViewBag.SuccessMessage == null)
+        if(ViewBag.Query != null)
         {
+            
+        }
+        else if (ViewBag.SuccessMessage == null)
+        {
+            <div id="QueryForm">
+                <form id="query" method="post" runat="server">
+                    <label for="query">Find a Form:</label>
+                    <input name="query" type="number" min="0">
+                    <input type="submit" id="submit" name="submit" value="Find Form" placeholder="Enter Form Number" />
+                </form>
+            </div>
+            <br/>
             <div id="SafetyForm">
                 <form id="safetyCheck" method="post" runat="server">
                     <div class="Element">
