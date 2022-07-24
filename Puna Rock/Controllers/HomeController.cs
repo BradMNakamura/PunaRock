@@ -9,6 +9,7 @@ using System.Dynamic;
 using SheetsQuickstart;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Newtonsoft.Json.Linq;
 
 namespace Puna_Rock.Controllers
 {
@@ -49,9 +50,13 @@ namespace Puna_Rock.Controllers
         }
         public IActionResult SafetyCheck(string formId)
         {
+            GoogleSheets query = new GoogleSheets();
             if (formId != null)
             {
-                ViewBag.Query = formId;
+                var json = query.getForm(spreadsheetId,SafetySheet,Int32.Parse(formId));
+                var data = JObject.Parse(json);
+                var result = (JArray)data["values"];
+                ViewBag.Query = result;
             }
             var SafetyCheck = SafetyCheckService.GetData();
             dynamic model = new ExpandoObject();
@@ -69,31 +74,35 @@ namespace Puna_Rock.Controllers
             //check for form query
             if (form.TryGetValue("query", out var formId))
             {
-                Response.Redirect(nameof(HomeController.SafetyCheck) +"?formId=" + formId);
+                return Redirect($"{nameof(HomeController.SafetyCheck)}?formId={formId}");
             }
-            GoogleSheets sheet = new GoogleSheets();
-            IList<IList<object>> sheetsValues = new List<IList<object>>();
-
-            foreach (var item in form)
+            else
             {
-                if (item.Key.ToString() != "submit" && item.Key.ToString() != "__RequestVerificationToken")
+                GoogleSheets sheet = new GoogleSheets();
+                IList<IList<object>> sheetsValues = new List<IList<object>>();
+
+                foreach (var item in form)
                 {
-                    sheetsValues.Add(new List<object>());
-                    sheetsValues[0].Add(item.Value[0].ToString());
-                    sheetsValues.Add(new List<object>());
-                    if (item.Value.Count > 1 && item.Value[0] != "Good")
+                    if (item.Key.ToString() != "submit" && item.Key.ToString() != "__RequestVerificationToken")
                     {
-                        sheetsValues[0].Add(item.Value[1].ToString());
-                    }
-                    else if (item.Key.ToString() != "date" && item.Key.ToString() != "EquipNo" && item.Key.ToString() != "hourmeter")
-                    {
-                        sheetsValues[0].Add("");
+                        sheetsValues.Add(new List<object>());
+                        sheetsValues[0].Add(item.Value[0].ToString());
+                        sheetsValues.Add(new List<object>());
+                        if (item.Value.Count > 1 && item.Value[0] != "Good")
+                        {
+                            sheetsValues[0].Add(item.Value[1].ToString());
+                        }
+                        else if (item.Key.ToString() != "date" && item.Key.ToString() != "EquipNo" && item.Key.ToString() != "hourmeter")
+                        {
+                            sheetsValues[0].Add("");
+                        }
                     }
                 }
+                sheet.Append(spreadsheetId, SafetySheet, sheetsValues);
+                ViewBag.SuccessMessage = "Success";
+                return View();
             }
-            sheet.Append(spreadsheetId, SafetySheet, sheetsValues);
-            ViewBag.SuccessMessage = "Success";
-            return View();
+            
         }
         public IActionResult ScaleTickets()
         {

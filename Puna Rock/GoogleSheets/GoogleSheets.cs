@@ -78,7 +78,37 @@ namespace SheetsQuickstart
             // TODO: Change code below to process the `response` object:
             return JsonConvert.SerializeObject(response);
         }
+        public string getForm(string spreadsheetId, string worksheetName, int uniqueId)
+        {
+            string l = "A"; //left most column
+            string r = "L"; // right most column
+            int rowNum = uniqueId + 1;
+            string row = $"!{l}{rowNum}:{r}{rowNum}";
+            // The A1 notation of the values to retrieve.
+            string range = $"{worksheetName}{row}"; ;  // TODO: Update placeholder value.
 
+            // How values should be represented in the output.
+            // The default render option is ValueRenderOption.FORMATTED_VALUE.
+            SpreadsheetsResource.ValuesResource.GetRequest.ValueRenderOptionEnum valueRenderOption = (SpreadsheetsResource.ValuesResource.GetRequest.ValueRenderOptionEnum)0;  // TODO: Update placeholder value.
+
+            // How dates, times, and durations should be represented in the output.
+            // This is ignored if value_render_option is
+            // FORMATTED_VALUE.
+            // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+            SpreadsheetsResource.ValuesResource.GetRequest.DateTimeRenderOptionEnum dateTimeRenderOption = (SpreadsheetsResource.ValuesResource.GetRequest.DateTimeRenderOptionEnum)0;  // TODO: Update placeholder value.
+
+            SpreadsheetsResource.ValuesResource.GetRequest request = service.Spreadsheets.Values.Get(spreadsheetId, range);
+            request.ValueRenderOption = valueRenderOption;
+            request.DateTimeRenderOption = dateTimeRenderOption;
+
+            // To execute asynchronously in an async method, replace `request.Execute()` as shown:
+            ValueRange response = request.Execute();
+            // Data.ValueRange response = await request.ExecuteAsync();
+
+            // TODO: Change code below to process the `response` object:
+            Console.WriteLine(JsonConvert.SerializeObject(response));
+            return JsonConvert.SerializeObject(response);
+        }
 
     }
 }
