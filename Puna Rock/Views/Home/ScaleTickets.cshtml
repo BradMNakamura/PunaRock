@@ -25,7 +25,26 @@
         <h2>Scale Tickets</h2>
     </div>
     @{
-        if (ViewBag.SuccessMessage == null)
+        @Html.Partial("_QueryForm")
+        if (ViewBag.Query != null)
+        {
+            int c = 1;
+            foreach (var q in ViewBag.Query)
+            {
+
+                @if (q == "Good" || q == "Caution" || q == "Tag-Out")
+                {
+                    <label for="@c">Question @c:</label>
+                    <div id="@c"><h5>@q</h5></div>
+                    c++;
+                }
+                else
+                {
+                    <div><b>@q</b></div>
+                }
+            }
+        }
+        else if (ViewBag.SuccessMessage == null)
         {
             <form id="scaleTickets" method="post" runat="server">
                 <div style=padding: 15px; min-width:100px; display: inline-block">
@@ -115,6 +134,7 @@
         {
             <div>
                 <script>
+                    document.getElementById("QueryForm").style.display = "none";
                     setInterval(function() { countdown() }, 1000);
                     countdown();
                 </script>
