@@ -81,7 +81,7 @@ namespace SheetsQuickstart
         public string getForm(string spreadsheetId, string worksheetName, int uniqueId)
         {
             string l = "A"; //left most column
-            string r = "L"; // right most column
+            string r = "AZ"; // right most column
             int rowNum = uniqueId + 1;
             string row = $"!{l}{rowNum}:{r}{rowNum}";
             // The A1 notation of the values to retrieve.
@@ -106,7 +106,7 @@ namespace SheetsQuickstart
             // Data.ValueRange response = await request.ExecuteAsync();
 
             // TODO: Change code below to process the `response` object:
-            Console.WriteLine(JsonConvert.SerializeObject(response));
+            //Console.WriteLine(JsonConvert.SerializeObject(response));
             return JsonConvert.SerializeObject(response);
         }
 
