@@ -42,19 +42,25 @@ namespace Puna_Rock.Controllers
         }
         public JToken? query(string spreadsheetId, string sheet, string formId)
         {
-            GoogleSheets q = new GoogleSheets();
-            var json = q.getForm(spreadsheetId, sheet, Int32.Parse(formId));
-            var data = JObject.Parse(json);
             try
             {
+                if(formId== null || Int32.Parse(formId) > 1129)
+                {
+                    ViewBag.Query = null;
+                    return null;
+                }
+                GoogleSheets q = new GoogleSheets();
+                var json = q.getForm(spreadsheetId, sheet, Int32.Parse(formId));
+                var data = JObject.Parse(json);
                 var result = (JArray)data["values"];
+                ViewBag.Query = result[0];
                 return result[0];
             }
             catch (Exception e){
                 Console.WriteLine(e);
+                ViewBag.Query = null;
                 return null;
             }
-            
         }
 
         public IActionResult Index()
@@ -67,11 +73,8 @@ namespace Puna_Rock.Controllers
         }
         public IActionResult SafetyCheck(string formId)
         {
-            if (formId != null)
-            {
-                var result = query(spreadsheetId,SafetySheet,formId);
-                ViewBag.Query = result;
-            }
+            query(spreadsheetId,SafetySheet,formId);
+
             var SafetyCheck = SafetyCheckService.GetData();
             dynamic model = new ExpandoObject();
             model.SafetyCheck = SafetyCheck;
