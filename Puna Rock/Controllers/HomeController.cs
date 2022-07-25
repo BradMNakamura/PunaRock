@@ -39,7 +39,24 @@ namespace Puna_Rock.Controllers
             SafetyCheckService = safetyCheckService;
             ScaleTicketsService = scaleTicketsService;
             CrusherService = crusherService;
-        } 
+        }
+        public JToken? query(string spreadsheetId, string sheet, string formId)
+        {
+            GoogleSheets q = new GoogleSheets();
+            var json = q.getForm(spreadsheetId, sheet, Int32.Parse(formId));
+            var data = JObject.Parse(json);
+            try
+            {
+                var result = (JArray)data["values"];
+                return result[0];
+            }
+            catch (Exception e){
+                Console.WriteLine(e);
+                return null;
+            }
+            
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -50,22 +67,21 @@ namespace Puna_Rock.Controllers
         }
         public IActionResult SafetyCheck(string formId)
         {
-            GoogleSheets query = new GoogleSheets();
             if (formId != null)
             {
-                var json = query.getForm(spreadsheetId,SafetySheet,Int32.Parse(formId));
-                var data = JObject.Parse(json);
-                var result = (JArray)data["values"];
+                var result = query(spreadsheetId,SafetySheet,formId);
                 ViewBag.Query = result;
             }
             var SafetyCheck = SafetyCheckService.GetData();
             dynamic model = new ExpandoObject();
             model.SafetyCheck = SafetyCheck;
             ViewBag.SuccessMessage = null;
+            /*
             if (User.Identity.IsAuthenticated == true)
             {
                 Console.WriteLine(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             }
+            */
             return View(model);
         }
         [HttpPost]
@@ -104,8 +120,13 @@ namespace Puna_Rock.Controllers
             }
             
         }
-        public IActionResult ScaleTickets()
+        public IActionResult ScaleTickets(string formId)
         {
+            if (formId != null)
+            {
+                var result = query(spreadsheetId, ScaleSheet, formId);
+                ViewBag.Query = result;
+            }
             var ScaleTickets = ScaleTicketsService.GetList();
             dynamic model = new ExpandoObject();
             model.ScaleTickets = ScaleTickets;
@@ -114,38 +135,46 @@ namespace Puna_Rock.Controllers
         [HttpPost]
         public IActionResult ScaleTickets(IFormCollection form)
         {
-            GoogleSheets sheet = new GoogleSheets();
-            IList<IList<object>> sheetsValues = new List<IList<object>>();
-            decimal gWeight = 0;
-            decimal tWeight = 0;
-            decimal nWeight = 0;
-            foreach (var item in form)
-            {               
-                if (item.Key.ToString()!="submit" && item.Key.ToString()!= "__RequestVerificationToken")
-                {
-                    sheetsValues.Add(new List<object>());
-                    sheetsValues[0].Add(item.Value[0].ToString());
-                    sheetsValues.Add(new List<object>());                  
-                    if(item.Value.Count > 1)
+            //check for form query
+            if (form.TryGetValue("query", out var formId))
+            {
+                return Redirect($"{nameof(HomeController.ScaleTickets)}?formId={formId}");
+            }
+            else
+            {
+                GoogleSheets sheet = new GoogleSheets();
+                IList<IList<object>> sheetsValues = new List<IList<object>>();
+                decimal gWeight = 0;
+                decimal tWeight = 0;
+                decimal nWeight = 0;
+                foreach (var item in form)
+                {               
+                    if (item.Key.ToString()!="submit" && item.Key.ToString()!= "__RequestVerificationToken")
                     {
-                        sheetsValues[0].Add(item.Value[1].ToString());
-                    }
-                    else if(item.Key.ToString()=="grossWeight")
-                    {
-                        gWeight = System.Convert.ToDecimal(item.Value[0].ToString());
-                    }
-                    else if (item.Key.ToString() == "tareWeight")
-                    {
-                        tWeight = System.Convert.ToDecimal(item.Value[0].ToString());
+                        sheetsValues.Add(new List<object>());
+                        sheetsValues[0].Add(item.Value[0].ToString());
+                        sheetsValues.Add(new List<object>());                  
+                        if(item.Value.Count > 1)
+                        {
+                            sheetsValues[0].Add(item.Value[1].ToString());
+                        }
+                        else if(item.Key.ToString()=="grossWeight")
+                        {
+                            gWeight = System.Convert.ToDecimal(item.Value[0].ToString());
+                        }
+                        else if (item.Key.ToString() == "tareWeight")
+                        {
+                            tWeight = System.Convert.ToDecimal(item.Value[0].ToString());
 
-                        nWeight = gWeight - tWeight;
-                        sheetsValues[0].Add(nWeight.ToString());
+                            nWeight = gWeight - tWeight;
+                            sheetsValues[0].Add(nWeight.ToString());
+                        }
                     }
                 }
+                sheet.Append(spreadsheetId, ScaleSheet, sheetsValues);
+                ViewBag.SuccessMessage = "Success";
+                return View();
             }
-            sheet.Append(spreadsheetId, ScaleSheet, sheetsValues);
-            ViewBag.SuccessMessage = "Success";
-            return View();
         }
 
         public IActionResult TimeSheet()
@@ -160,7 +189,7 @@ namespace Puna_Rock.Controllers
             foreach (var item in form)
             {   
                 // Just to see the pushed info
-                Console.WriteLine(item);
+                //Console.WriteLine(item);
                 if (item.Key.ToString() != "submit" && item.Key.ToString() != "__RequestVerificationToken")
                 {
                     foreach (var temp in item.Value)
@@ -177,8 +206,13 @@ namespace Puna_Rock.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Crusher()
+        public IActionResult Crusher(string formId)
         {
+            if (formId != null)
+            {
+                var result = query(spreadsheetId, CrusherSheet, formId);
+                ViewBag.Query = result;
+            }
             var Crusher = CrusherService.GetData();
             dynamic model = new ExpandoObject();
             model.Crusher = Crusher;
@@ -188,28 +222,36 @@ namespace Puna_Rock.Controllers
         [HttpPost]
         public IActionResult Crusher(IFormCollection form)
         {
-            GoogleSheets sheet = new GoogleSheets();
-            IList<IList<object>> sheetsValues = new List<IList<object>>();
-            foreach (var item in form)
+            //check for form query
+            if (form.TryGetValue("query", out var formId))
             {
-                if (item.Key.ToString() != "submit" && item.Key.ToString() != "__RequestVerificationToken")
+                return Redirect($"{nameof(HomeController.Crusher)}?formId={formId}");
+            }
+            else
+            {
+                GoogleSheets sheet = new GoogleSheets();
+                IList<IList<object>> sheetsValues = new List<IList<object>>();
+                foreach (var item in form)
                 {
-                    sheetsValues.Add(new List<object>());
-                    sheetsValues[0].Add(item.Value[0].ToString());
-                    sheetsValues.Add(new List<object>());
-                    if (item.Value.Count > 1 && item.Value[0] != "Good")
+                    if (item.Key.ToString() != "submit" && item.Key.ToString() != "__RequestVerificationToken")
                     {
-                        sheetsValues[0].Add(item.Value[1].ToString());
-                    }
-                    else if (item.Key.ToString() != "date" && item.Key.ToString() != "EquipNo" && item.Key.ToString() != "hourmeter")
-                    {
-                        sheetsValues[0].Add("");
+                        sheetsValues.Add(new List<object>());
+                        sheetsValues[0].Add(item.Value[0].ToString());
+                        sheetsValues.Add(new List<object>());
+                        if (item.Value.Count > 1 && item.Value[0] != "Good")
+                        {
+                            sheetsValues[0].Add(item.Value[1].ToString());
+                        }
+                        else if (item.Key.ToString() != "date" && item.Key.ToString() != "EquipNo" && item.Key.ToString() != "hourmeter")
+                        {
+                            sheetsValues[0].Add("");
+                        }
                     }
                 }
+                sheet.Append(spreadsheetId, CrusherSheet, sheetsValues);
+                ViewBag.SuccessMessage = "Success";
+                return View();
             }
-            sheet.Append(spreadsheetId, CrusherSheet, sheetsValues);
-            ViewBag.SuccessMessage = "Success";
-            return View();
         }
 
         public IActionResult Placeholder()
